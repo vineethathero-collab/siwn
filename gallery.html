@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>සිව්මග ධර්මායතනය - මාධ්‍ය ගැලරිය</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@600;700;800&family=Noto+Serif+Sinhala:wght@300;400;600;700&family=Noto+Sans+Sinhala:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #f39c12;
+            --primary-dark: #d35400;
+            --accent: #e67e22;
+            --bg-dark: #0a0f18;
+            --card-dark: #121824;
+            --text-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            background-color: #fcfbf7;
+            scroll-behavior: smooth;
+        }
+
+        .font-abhaya {
+            font-family: 'Abhaya Libre', serif;
+        }
+
+        .font-sinhala-serif {
+            font-family: 'Noto Serif Sinhala', serif;
+        }
+
+        /* Custom Glassmorphism styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(243, 156, 18, 0.15);
+        }
+
+        .glass-dark {
+            background: rgba(10, 15, 24, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Tab Transition Effect */
+        .tab-content {
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Premium Image/Video hover effects */
+        .media-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .media-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.12);
+        }
+
+        /* Custom video play overlay glow */
+        .play-btn-glow {
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(243, 156, 18, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(243, 156, 18, 0);
+            }
+        }
+
+        /* Floating home button on scroll & hover */
+        .floating-home-btn {
+            animation: bounceAndGlow 3s infinite ease-in-out;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .floating-home-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(243, 156, 18, 0.5);
+        }
+
+        @keyframes bounceAndGlow {
+            0%, 100% {
+                transform: translateY(0);
+                box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+            }
+            50% {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 35px rgba(243, 156, 18, 0.5);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased overflow-x-hidden">
+
+
+    <!-- Unified Hero & Upload Banner with split glassmorphic layout (Fully optimized for mobile) -->
+    <section class="relative bg-gradient-to-b from-amber-50/70 via-white to-transparent py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Floating spiritual shapes inside background -->
+        <div class="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-amber-200 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-orange-100 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Left: Beautiful Welcome Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase mb-3 sm:mb-4">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        ඩිජිටල් මතක පියස
+                    </span>
+                    <h2 class="font-abhaya font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight mb-3 sm:mb-4">
+                        සිව්මග දහම් සෙවනේ <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600 font-sinhala-serif text-2xl sm:text-3xl lg:text-4xl">පින්බර මතකාවර්ජනය</span>
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base lg:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-light mb-6 lg:mb-0">
+                        සිව්මග ධර්මායතනයේ පැවැත්වුණු සදහම් සාකච්ඡා, උතුම් පින්කම්, ආගමික උත්සව සහ ජීවිතය ආලෝකවත් කළ මතකයන් මෙතැනින් එකවර නරඹන්න.
+                    </p>
+                </div>
+
+                <!-- Right: Compact and Modern Upload Card -->
+                <div class="lg:col-span-5 w-full">
+                    <div class="glass-card rounded-2xl p-5 sm:p-8 shadow-xl border border-amber-500/10 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -mr-10 -mt-10 group-hover:scale-125 transition-transform duration-500"></div>
+                        
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center text-amber-600 mx-auto mb-3 sm:mb-4 text-xl">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h3 class="font-sinhala-serif font-bold text-base sm:text-lg text-slate-800 mb-1.5 sm:mb-2">ඔබේ මතකයන් අපට එවන්න</h3>
+                            <p class="text-slate-500 text-xs sm:text-sm mb-5 sm:mb-6 max-w-xs mx-auto">
+                                ඔබ සතු සිව්‍මග ධර්මායතනයේ පින්කම් හෝ උත්සව වල ඡායාරූප/වීඩියෝ අපට පහසුවෙන් එවන්න.
+                            </p>
+                            
+                            <!-- Split Buttons for Image and Video Upload -->
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0sIf0SwYIdYqszZMg2f-0_UAi_R9d8rB-eAFilvT-4hlfcg/viewform?usp=header" target="_blank" class="flex-1 inline-flex justify-center items-center gap-2 px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold text-xs shadow-md transition duration-200">
+                                    <i class="fa-regular fa-image text-sm"></i>
+                                    <span>ඡායාරූප එක් කරන්න</span>
+                                </a>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0sIf0SwYIdYqszZMg2f-0_UAi_R9d8rB-eAFilvT-4hlfcg/viewform?usp=header" target="_blank" class="flex-1 inline-flex justify-center items-center gap-2 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold text-xs shadow-md transition duration-200">
+                                    <i class="fa-regular fa-square-play text-sm"></i>
+                                    <span>වීඩියෝ එක් කරන්න</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- The Unified Switcher (Optimized padding and text for tiny screens) -->
+    <section class="max-w-6xl mx-auto px-4 mb-8 sm:mb-10">
+        <div class="bg-amber-50/50 p-1.5 sm:p-2.5 rounded-2xl max-w-lg mx-auto shadow-inner flex border border-amber-500/10">
+            <!-- Photos Tab Trigger -->
+            <button onclick="switchTab('photos-section')" id="btn-photos-section" class="flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base transition-all duration-300 bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md">
+                <i class="fa-regular fa-images text-sm sm:text-lg"></i>
+                <span>📸 ඡායාරූප එකතුව</span>
+            </button>
+            <!-- Videos Tab Trigger -->
+            <button onclick="switchTab('videos-section')" id="btn-videos-section" class="flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base text-slate-600 hover:text-amber-600 transition-all duration-300">
+                <i class="fa-solid fa-video text-sm sm:text-lg"></i>
+                <span>🎥 වීඩියෝ දසුන්</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- TAB 1: PHOTO GALLERY -->
+    <main id="photos-section" class="tab-content active max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        
+        <!-- Category Filters inside Photos (Optimized wrapping for smaller screens) -->
+        <div class="flex flex-wrap justify-center gap-1.5 sm:gap-3 mb-8 sm:mb-10">
+            <button class="filter-btn active px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-amber-500/20 text-slate-700 bg-white shadow-sm font-semibold text-[11px] sm:text-sm hover:border-amber-500/60 transition duration-300" data-filter="all">
+                සියල්ල
+            </button>
+            <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-amber-500/20 text-slate-700 bg-white shadow-sm font-semibold text-[11px] sm:text-sm hover:border-amber-500/60 transition duration-300" data-filter="events">
+                උත්සව
+            </button>
+            <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-amber-500/20 text-slate-700 bg-white shadow-sm font-semibold text-[11px] sm:text-sm hover:border-amber-500/60 transition duration-300" data-filter="dhamma">
+                පිං කටයුතු
+            </button>
+            <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-amber-500/20 text-slate-700 bg-white shadow-sm font-semibold text-[11px] sm:text-sm hover:border-amber-500/60 transition duration-300" data-filter="other">
+                වෙනත්
+            </button>
+        </div>
+
+        <!-- Photo Grid (Responsive gap and grid settings) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8" id="photoGallery">
+            
+            <!-- Card 1 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/d/1LfqZxzwMz1LAntXbk34vRfHOdu6RXTXJ" alt="Sivmaga Dhamma Ceremony" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">සපිරිවර ශීල සමාදාන පින්කම</h4>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/d/1Gksded8WiAY10bszz7FQE2Uo-crC03zt" alt="Sivmaga Monastic Life" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">දහම් පාසල් සිසුන් උදෙසා දේශනාව</h4>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1jv96ECamyzWBj72QJAFfRxQAutxEnvz_" alt="Sivmaga Poya Ceremony" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">පොහෝ දින විශේෂ මෙහෙය</h4>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1qdynRU0skZiOYLMa52mSgwTS8f_gg3Qx" alt="Sivmaga Dhamma Assembly" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">සති අන්ත ධර්ම දේශනා අවස්ථාව</h4>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1PEkg_x6rZj0pERkMELAUXoU4MklSMmQv" alt="Sivmaga Meditation Program" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">සතිපට්ඨාන භාවනා වැඩසටහන</h4>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1ptvVghY0UJdnUVglCEY8P9FFwwBWJrOH" alt="Sivmaga Alms giving" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">මහා සඟරුවන උදෙසා පූජාවන්</h4>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1BoYRQrq37rmLU7NbDjxtcl-2vnMvBMrO" alt="Sivmaga Event Gathering" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">පින්බර උපාසක උපාසිකා සමූහය</h4>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/167bXfL-eRD6HN6rqm4RvqM_dmzx3kcPg" alt="Sivmaga Dhamma Class" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">පොහෝ දින ධර්ම දේශනාව</h4>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1wjkAHhtcuWjZjJ1O9dibtYdbyBVWmrRW" alt="Sivmaga Vihara Puja" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">විහාර පූජා පිංකම් මාලාව</h4>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="media-card gallery-card relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md group cursor-pointer" data-category="dhamma">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1D7twRmPe0fuUP_ja791mylLhQcB6912E" alt="Sivmaga Bodhi Puja" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="info-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <span class="text-amber-400 font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-1">පිං කටයුතු</span>
+                    <h4 class="text-white font-sinhala-serif text-sm sm:text-base font-bold">සතිපතා බෝධි පූජා පිංකම</h4>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- TAB 2: VIDEO GALLERY (Responsive column system) -->
+    <main id="videos-section" class="tab-content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        
+        <!-- Video Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            
+            <!-- Video 1 (YouTube Embed loaded via responsive overlay) -->
+            <div class="media-card video-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col">
+                <div class="relative aspect-video bg-slate-950 group cursor-pointer overflow-hidden" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'සැනසීමට මග - පූජ්‍ය වටගොඩ මනිකිත හිමි')">
+                    <!-- Elegant Custom Thumbnail (Avoid heavy iframe lag until clicked) -->
+                    <img src="https://placehold.co/600x338/1e293b/f39c12?text=Sivmaga+Dhamma+Sermon" alt="Dhamma Sermon Preview" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                    <!-- Play icon with luxury breathing animation -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="play-btn-glow w-14 h-14 sm:w-16 sm:h-16 bg-amber-500 rounded-full flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-amber-500/30 group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-3 right-3 bg-black/75 text-white text-xs px-2.5 py-1 rounded-md font-medium tracking-wide">12:45</span>
+                </div>
+                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-amber-600 font-semibold text-xs uppercase tracking-wider mb-2 block">ධර්ම දේශනා</span>
+                        <h4 class="font-sinhala-serif font-bold text-slate-800 text-sm sm:text-base lg:text-lg leading-snug hover:text-amber-500 transition cursor-pointer" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'සැනසීමට මග - පූජ්‍ය වටගොඩ මනිකිත හිමි')">
+                            සැනසීමට මග - පූජ්‍ය වටගොඩ මනිකිත හිමි
+                        </h4>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-regular fa-clock"></i> 2026/05/12 දින පටිගත කරන ලදී.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="media-card video-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col">
+                <div class="relative aspect-video bg-slate-950 group cursor-pointer overflow-hidden" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'වාර්ෂික කඨින මහා පින්කම් මාලාව - 2026')">
+                    <img src="https://placehold.co/600x338/1e293b/e67e22?text=Katina+Chivara+Puja" alt="Katina Puja Preview" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="play-btn-glow w-14 h-14 sm:w-16 sm:h-16 bg-amber-500 rounded-full flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-amber-500/30 group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-3 right-3 bg-black/75 text-white text-xs px-2.5 py-1 rounded-md font-medium tracking-wide">18:20</span>
+                </div>
+                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-amber-600 font-semibold text-xs uppercase tracking-wider mb-2 block">පිං කටයුතු</span>
+                        <h4 class="font-sinhala-serif font-bold text-slate-800 text-sm sm:text-base lg:text-lg leading-snug hover:text-amber-500 transition cursor-pointer" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'වාර්ෂික කඨින මහා පින්කම් මාලාව - 2026')">
+                            වාර්ෂික කඨින මහා පින්කම් මාලාව - 2026
+                        </h4>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-regular fa-clock"></i> 2026/11/04 දින පටිගත කරන ලදී.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="media-card video-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col">
+                <div class="relative aspect-video bg-slate-950 group cursor-pointer overflow-hidden" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'දෙමාපිය උපහාර සහ ලේ දන්දීමේ කඳවුර')">
+                    <img src="https://placehold.co/600x338/1e293b/f39c12?text=Social+Service+Campaign" alt="Social Service Preview" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="play-btn-glow w-14 h-14 sm:w-16 sm:h-16 bg-amber-500 rounded-full flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-amber-500/30 group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-3 right-3 bg-black/75 text-white text-xs px-2.5 py-1 rounded-md font-medium tracking-wide">09:15</span>
+                </div>
+                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-amber-600 font-semibold text-xs uppercase tracking-wider mb-2 block">විශේෂ වැඩසටහන්</span>
+                        <h4 class="font-sinhala-serif font-bold text-slate-800 text-sm sm:text-base lg:text-lg leading-snug hover:text-amber-500 transition cursor-pointer" onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'දෙමාපිය උපහාර සහ ලේ දන්දීමේ කඳවුර')">
+                            දෙමාපිය උපහාර සහ ලේ දන්දීමේ කඳවුර
+                        </h4>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-regular fa-clock"></i> 2026/04/18 දින පටිගත කරන ලදී.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER WITH D3 MAP -->
+    <footer class="dhamma-footer-advanced relative overflow-hidden bg-[#050c16] text-white">
+        <!-- Interactive background D3 Globe element -->
+        <div id="footer-map-wrap" class="absolute inset-0 w-full h-full opacity-35 z-0 pointer-events-none">
+            <div class="map-overlay-v2 absolute inset-0 bg-gradient-to-t from-[#050c16] via-[#050c16]/95 to-transparent"></div>
+            <svg id="footer-dynamic-map" class="w-full h-full"></svg>
+        </div>
+
+        <div class="footer-main-container relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-white/10 pb-10 mb-8">
+                
+                <!-- Col 1: About Temple -->
+                <div class="flex flex-col space-y-4">
+                    <h3 class="footer-h3 font-sinhala-serif font-bold text-2xl text-amber-500">සිව්මග ධර්මායතනය</h3>
+                    <p class="f-desc text-slate-400 text-sm leading-relaxed">
+                        සම්බුදු දහමේ ආලෝකයෙන් දරු පරපුරේ හෙට දවස ආලෝකවත් කරන ගෝලීය අධ්‍යාපනික හා සාමාජීය මෙහෙවර.
+                    </p>
+                    <div class="f-socials flex space-x-3.5 pt-2">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-amber-500 hover:text-slate-900 hover:-translate-y-1 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-amber-500 hover:text-slate-900 hover:-translate-y-1 transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-amber-500 hover:text-slate-900 hover:-translate-y-1 transition duration-300">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Global Networks -->
+                <div class="flex flex-col space-y-4">
+                    <h4 class="footer-h4 font-sinhala-serif font-semibold text-lg text-amber-500">ගෝලීය ජාලය</h4>
+                    <ul id="global-branch-list" class="branch-list grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-slate-300">
+                        <!-- Dynamic list built via JS -->
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contacts -->
+                <div class="flex flex-col space-y-4">
+                    <h4 class="footer-h4 font-sinhala-serif font-semibold text-lg text-amber-500">අප අමතන්න</h4>
+                    <div class="flex flex-col space-y-3 text-slate-300 text-sm">
+                        <div class="contact-item flex items-start gap-3">
+                            <i class="fas fa-envelope text-amber-500 mt-1"></i>
+                            <span>info@jethavanarama.org</span>
+                        </div>
+                        <div class="contact-item flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-amber-500 mt-1"></i>
+                            <span>+94 77 777 0129</span>
+                        </div>
+                        <div class="contact-item flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-amber-500 mt-1"></i>
+                            <span class="leading-relaxed">ජේතවනාරාම විහාරය, 356/3, නුගදන්ඩ, කලටුවාව.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright area -->
+            <div class="text-center text-slate-500 text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>© 2026 | සිව්මග ධර්මායතනය | සියලුම හිමිකම් ඇවිරිණි.</p>
+                <p>නිර්මාණය: <span class="text-amber-500 font-medium">Digital Dhamma Team</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Persistent Animated Floating Home Button with Glowing Effect -->
+    <a href="index.html" class="floating-home-btn fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-orange-500/40 hover:scale-110 active:scale-95 transition-all duration-300 group border-2 border-white/80" title="මුල් පිටුවට">
+        <i class="fa-solid fa-house text-xl group-hover:rotate-12 transition-transform duration-300"></i>
+        <!-- Ripple effect ring -->
+        <span class="absolute inset-0 rounded-full bg-orange-400/40 animate-ping pointer-events-none scale-75 group-hover:scale-100 transition-transform"></span>
+    </a>
+
+    <!-- Photo Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex-col justify-center items-center p-4">
+        <!-- Close button with pulse effect -->
+        <button class="close-btn absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-amber-500 hover:text-slate-900 rounded-full flex items-center justify-center text-white text-2xl transition duration-300" onclick="closeLightbox()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="" alt="Sivmaga Fullscreen Display" id="lightboxImg" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl border border-white/5">
+        <h4 id="lightboxCaption" class="text-white mt-4 font-sinhala-serif text-base sm:text-lg font-bold"></h4>
+    </div>
+
+    <!-- Video Player Modal (Theater Mode!) -->
+    <div id="videoModal" class="fixed inset-0 bg-slate-950/95 z-[9999] hidden flex-col justify-center items-center p-4">
+        <button class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-amber-500 hover:text-slate-900 rounded-full flex items-center justify-center text-white text-2xl transition duration-300" onclick="closeVideoModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10">
+            <iframe id="videoIframe" class="w-full h-full" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4 id="videoModalTitle" class="text-white mt-5 font-sinhala-serif text-base sm:text-xl font-bold max-w-2xl text-center"></h4>
+    </div>
+
+    <!-- Interactive D3 Globe & Interface Logic Scripts -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Tab switching logic (Active state design change)
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Reset tab button styling
+            const btnPhotos = document.getElementById('btn-photos-section');
+            const btnVideos = document.getElementById('btn-videos-section');
+
+            if(tabId === 'photos-section') {
+                btnPhotos.className = "flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base transition-all duration-300 bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md";
+                btnVideos.className = "flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base text-slate-600 hover:text-amber-600 transition-all duration-300";
+            } else {
+                btnVideos.className = "flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base transition-all duration-300 bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md";
+                btnPhotos.className = "flex-1 flex items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base text-slate-600 hover:text-amber-600 transition-all duration-300";
+            }
+        }
+
+        // Filtering System within Photos
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active styling from other buttons
+                filterButtons.forEach(b => {
+                    b.classList.remove('active', 'bg-amber-500', 'text-white', 'border-amber-500');
+                    b.classList.add('bg-white', 'text-slate-700', 'border-amber-500/20');
+                });
+
+                // Style active button
+                btn.classList.add('active', 'bg-amber-500', 'text-white', 'border-amber-500');
+                btn.classList.remove('bg-white', 'text-slate-700', 'border-amber-500/20');
+
+                const filter = btn.getAttribute('data-filter');
+
+                galleryCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Photo Lightbox Trigger
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        galleryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                const title = card.querySelector('h4').textContent;
+                lightboxImg.src = img.src;
+                lightboxCaption.textContent = title;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close Lightbox on Background Click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Theater-Mode Video Modal Controller
+        const videoModal = document.getElementById('videoModal');
+        const videoIframe = document.getElementById('videoIframe');
+        const videoModalTitle = document.getElementById('videoModalTitle');
+
+        function playVideoModal(url, title) {
+            videoIframe.src = url;
+            videoModalTitle.textContent = title;
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            videoModal.style.display = 'none';
+            videoIframe.src = ''; // Stops playback instantly
+            document.body.style.overflow = 'auto';
+        }
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+
+        // --- Interactive D3 Globe Implementation ---
+        (function () {
+            const wrap = document.getElementById('footer-map-wrap');
+            const width = wrap.offsetWidth;
+            const height = wrap.offsetHeight || 300;
+            const svg = d3.select("#footer-dynamic-map").attr("width", width).attr("height", height);
+
+            const locations = [
+                { name: "Sri Lanka", coords: [80.7718, 7.8731], flag: "https://flagcdn.com/w40/lk.png", center: true },
+                { name: "Australia", coords: [133.7751, -25.2744], flag: "https://flagcdn.com/w40/au.png" },
+                { name: "Japan", coords: [138.2529, 36.2048], flag: "https://flagcdn.com/w40/jp.png" },
+                { name: "England", coords: [-1.5, 52.5], flag: "https://flagcdn.com/w40/gb.png" },
+                { name: "USA", coords: [-95.7129, 37.0902], flag: "https://flagcdn.com/w40/us.png" },
+                { name: "Canada", coords: [-106.3468, 56.1304], flag: "https://flagcdn.com/w40/ca.png" },
+                { name: "Italy", coords: [12.5674, 41.8719], flag: "https://flagcdn.com/w40/it.png" },
+                { name: "France", coords: [2.2137, 46.2276], flag: "https://flagcdn.com/w40/fr.png" }
+            ];
+
+            const projection = d3.geoMercator().scale(width / 6.5).translate([width / 2, height / 1.5]);
+            const path = d3.geoPath().projection(projection);
+
+            d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(data => {
+                svg.selectAll(".land").data(data.features).enter().append("path").attr("class", "land").attr("d", path)
+                    .attr("fill", "#101e35")
+                    .attr("stroke", "#1d3557")
+                    .attr("stroke-width", "0.5");
+
+                const sPoint = projection(locations[0].coords);
+
+                locations.forEach((loc, i) => {
+                    const tPoint = projection(loc.coords);
+
+                    if (i > 0) {
+                        d3.select("#global-branch-list").append("li")
+                            .attr("class", "flex items-center gap-2.5 hover:text-amber-500 transition duration-300")
+                            .html(`<img src="${loc.flag}" class="w-5 h-3.5 object-cover rounded shadow-sm"> ${loc.name}`);
+
+                        const dx = tPoint[0] - sPoint[0], dy = tPoint[1] - sPoint[1], dr = Math.sqrt(dx * dx + dy * dy) * 1.2;
+                        const pLine = svg.append("path").attr("class", "link")
+                            .attr("d", `M${sPoint[0]},${sPoint[1]}A${dr},${dr} 0 0,1 ${tPoint[0]},${tPoint[1]}`)
+                            .attr("fill", "none")
+                            .attr("stroke", "#f39c12")
+                            .attr("stroke-width", "1")
+                            .attr("stroke-dasharray", "4")
+                            .attr("opacity", "0.45");
+
+                        const dot = svg.append("circle").attr("class", "moving-dot").attr("r", 2.5).attr("fill", "#ffffff");
+                        function anim() {
+                            dot.transition().duration(4000 + Math.random() * 2000).attrTween("transform", () => t => {
+                                const p = pLine.node().getPointAtLength(t * pLine.node().getTotalLength());
+                                return `translate(${p.x},${p.y})`;
+                            }).on("end", anim);
+                        }
+                        anim();
+                    }
+
+                    const lbl = svg.append("g").attr("transform", `translate(${tPoint[0] + 5},${tPoint[1] - 10})`);
+                    lbl.append("rect").attr("class", "label-box").attr("width", 50).attr("height", 14).attr("fill", "white").attr("opacity", 0.7).attr("rx", 3);
+                    lbl.append("text").attr("x", 5).attr("y", 10).text(loc.name).style("font-size", "8px").style("fill", "#000").style("font-weight", "bold");
+
+                    svg.append("circle").attr("cx", tPoint[0]).attr("cy", tPoint[1]).attr("r", loc.center ? 4.5 : 2.5).attr("fill", loc.center ? "#f39c12" : "#00eaff");
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
