@@ -21,7 +21,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="සිව්මග ධර්මායතනය | Siwmaga Dharmayathanaya">
     <meta property="twitter:description"
-        content="සිව්මග ධර්මායතනය මගින් පවත්වනු ලබන දහම් පාසල, ධර්ම දේශනා සහ සමාජ සත්කාර සඳහා ඔබත් අදම සම්බන්ධ වන්න.">
+        content="සිව්මග ධර්මායතනය mගින් පවත්වනු ලබන දහම් පාසල, ධර්ම දේශනා සහ සමාජ සත්කාර සඳහා ඔබත් අදම සම්බන්ධ වන්න.">
     <meta property="twitter:image" content="SM l.png">
 
     <!-- නිල ලාංඡනය Favicon එක ලෙස සම්බන්ධ කිරීම -->
@@ -31,7 +31,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts මඟින් සිංහල සහ ඉංග්‍රීසි අකුරු විලාසිතා එක් කිරීම -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Font Awesome අයිකන එකතුව -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,6 +51,20 @@
             font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
             overflow-x: hidden;
             color: #333;
+            line-height: 1.8;
+            letter-spacing: 0.015em;
+        }
+
+        /* --- PREMIUM SINHALA TYPOGRAPHY PRESETS --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        p, span, td, li, a {
+            font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
         }
 
         /* --- SKELETON PLACEHOLDER SHIMMER EFFECT --- */
@@ -160,6 +174,115 @@
             width: 100%;
         }
 
+        /* --- DAHAM PASALA REGISTER BUTTON BLUE EFFECTS --- */
+        .btn-daham-apply {
+            animation: pulseDahamGlow 3s infinite ease-in-out;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes pulseDahamGlow {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4), 0 0 0 0px rgba(59, 130, 246, 0.2);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(30, 58, 138, 0.5), 0 0 15px 5px rgba(6, 182, 212, 0.3);
+                transform: translateY(-3px);
+            }
+        }
+
+        .animate-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animate-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-25deg);
+        }
+
+        .animate-shine:hover::after {
+            animation: shineEffect 1.2s ease-in-out infinite;
+        }
+
+        @keyframes shineEffect {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
+        @keyframes bounceHorizontal {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .animate-bounce-horizontal {
+            animation: bounceHorizontal 1.2s infinite ease-in-out;
+        }
+
+        /* --- GALLERY REDIRECT BUTTON SPECIAL FOCUS ANIMATION --- */
+        @keyframes galleryBtnFocus {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(243, 156, 18, 0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 35px rgba(243, 156, 18, 0.55);
+            }
+        }
+
+        .animate-gallery-focus {
+            animation: galleryBtnFocus 2.5s infinite ease-in-out;
+        }
+
+        /* --- DAHAM PASALA COLLAGE FLOATING ANIMATIONS (MATCHING image_430085.png) --- */
+        @keyframes floatImg1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(-1.5deg); }
+        }
+
+        @keyframes floatImg2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(1deg); }
+        }
+
+        @keyframes floatImg3 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(-0.5deg); }
+        }
+
+        /* Updated: No borders or shadows on badge pulse */
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+            }
+            50% {
+                transform: scale(1.04) translateY(-5px);
+            }
+        }
+
+        .animate-float-img-1 {
+            animation: floatImg1 8s ease-in-out infinite;
+        }
+
+        .animate-float-img-2 {
+            animation: floatImg2 9s ease-in-out infinite;
+        }
+
+        .animate-float-img-3 {
+            animation: floatImg3 7s ease-in-out infinite;
+        }
+
+        .animate-badge-pulse {
+            animation: badgePulse 5s ease-in-out infinite;
+        }
+
         /* --- ප්‍රධාන HERO SLIDER කලාපය --- */
         .hero-container {
             position: relative;
@@ -219,6 +342,10 @@
 
         .slide .item:nth-child(5) {
             left: calc(65% + 320px);
+        }
+
+        .slide .item:nth-child(n + 3) {
+            cursor: pointer;
         }
 
         .slide .item:nth-child(n + 6) {
@@ -537,7 +664,6 @@
         @media (max-width: 1024px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
             }
 
             .overlay {
@@ -610,30 +736,12 @@
             }
         }
 
-        @keyframes badgePulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 15px 30px rgba(243, 156, 18, 0.15);
-            }
-
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 20px 35px rgba(243, 156, 18, 0.35);
-            }
-        }
-
         .animate-float-img-1 {
             animation: floatImg1 7s ease-in-out infinite;
         }
 
         .animate-float-img-2 {
             animation: floatImg2 7s ease-in-out infinite;
-        }
-
-        .animate-badge-pulse {
-            animation: badgePulse 4s ease-in-out infinite;
         }
 
         /* --- 3D COVERFLOW MEMORY GALLERY --- */
@@ -662,8 +770,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: pan-y;
+            outline: none;
         }
 
+        /* Enhanced bezier transition curve for multi-image smooth slide */
         .carousel-3d-slide {
             position: absolute;
             width: 540px;
@@ -672,9 +783,9 @@
             overflow: hidden;
             background-color: #222;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
-                opacity 0.6s ease,
-                filter 0.6s ease;
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: transform, opacity;
             cursor: pointer;
             user-select: none;
@@ -689,7 +800,6 @@
         }
 
         .carousel-3d-slide.active-3d {
-
             box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
             z-index: 10;
         }
@@ -1081,6 +1191,13 @@
             }
         }
 
+        @media (max-width: 640px) {
+            #daham-pasala {
+                padding-top: 14px !important;
+                padding-bottom: 14px !important;
+            }
+        }
+
         @keyframes borderPulse {
 
             0%,
@@ -1120,58 +1237,49 @@
             <nav class="hidden md:flex items-center gap-8 text-white font-medium text-[15px]">
                 <a href="#" class="nav-link text-amber-500">මුල් පිටුව</a>
 
-                <a href="#services" class="nav-link hover:text-amber-400">අපගේ සේවාවන්</a>
+                <a href="#services" class="nav-link hover:text-amber-400">සේවාවන්</a>
                 <a href="#gallery-3d" class="nav-link hover:text-amber-400">මතක සිතුවම්</a>
                 <a href="#timetable" class="nav-link hover:text-amber-400">කාලසටහන</a>
                 <a href="#youtube-preview" class="nav-link hover:text-amber-400">මාධ්‍ය</a>
                 <a href="#news" class="nav-link hover:text-amber-400">පුවත්</a>
                 <a href="#footer" class="nav-link hover:text-amber-400">අප අමතන්න</a>
-                <a href="index-en.html" class="ml-2 px-3 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-sm border border-white/20 transition-all font-bold flex items-center gap-2" title="Switch to English"><i class="fas fa-globe"></i> EN</a>
+                
+                <!-- කැපී පෙනෙන ගැලරිය සබැඳිය (Prominent Gallery Menu Option) -->
+                <a href="gallery.html" target="_blank"
+                    class="px-3.5 py-1.5 bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-black rounded-full border border-amber-500/40 transition-all font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/5 hover:-translate-y-0.5"
+                    title="ගැලරිය පිටුව නැරඹීමට">
+                    <i class="fa-solid fa-photo-film text-xs"></i> ගැලරිය
+                </a>
+
+                <a href="index.html"
+                    class="ml-2 px-3 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-sm border border-white/20 transition-all font-bold flex items-center gap-2"
+                    title="Switch to Sinhala"><i class="fas fa-globe"></i> සිංහල</a>
             </nav>
 
-            <!-- Actions -->
+            <!-- Actions (Glassmorphic Cyan Layout matched to the Gallery button) -->
             <div class="hidden md:block">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWwGPvcyp4KQhGs0ilMPCcpF9IPF8g2NJCZPmzRhJtuakpCw/viewform"
                     target="_blank"
-                    class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transform hover:-translate-y-0.5 inline-block">
+                    class="px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500 text-cyan-400 hover:text-black rounded-full border border-cyan-500/40 transition-all font-bold flex items-center gap-1.5 shadow-md shadow-cyan-500/5 hover:-translate-y-0.5 text-sm">
                     අයදුම් කරන්න <i class="fa-regular fa-hand-point-right ml-1 text-xs"></i>
                 </a>
             </div>
 
             <!-- Mobile Menu Toggle Button (Swaps cleanly on menu state changes) -->
             <div class="md:hidden flex items-center gap-3">
-                <a href="index-en.html" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm border border-white/20 transition-all font-bold flex items-center gap-2" title="Switch to English"><i class="fas fa-globe"></i> EN</a>
+                <a href="index.html"
+                    class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm border border-white/20 transition-all font-bold flex items-center gap-2"
+                    title="Switch to Sinhala"><i class="fas fa-globe"></i> සිංහල</a>
                 <button
-                    class="text-white text-2xl focus:outline-none w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
-                    id="mobile-menu-btn" aria-label="Toggle menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Drawer (Autocloses cleanly on link selection) -->
-        <div class="hidden md:hidden bg-slate-900 border-t border-white/10 text-white px-6 py-6 space-y-4 shadow-2xl transition-all duration-300"
-            id="mobile-menu">
-            <a href="#" class="block font-medium text-amber-500 py-2 border-b border-white/5">මුල් පිටුව</a>
-
-            <a href="#services" class="block font-medium hover:text-amber-400 py-2 border-b border-white/5">අපගේ
-                සේවාවන්</a>
-            <a href="#gallery-3d" class="block font-medium hover:text-amber-400 py-2 border-b border-white/5">මතක
-                සිතුවම්</a>
-            <a href="#timetable" class="block font-medium hover:text-amber-400 py-2 border-b border-white/5">කාලසටහන</a>
-            <a href="#youtube-preview"
-                class="block font-medium hover:text-amber-400 py-2 border-b border-white/5">මාධ්‍ය</a>
-            <a href="#news" class="block font-medium hover:text-amber-400 py-2 border-b border-white/5">පුවත්</a>
-            <a href="#footer" class="block font-medium hover:text-amber-400 py-2">අප අමතන්න</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWwGPvcyp4KQhGs0ilMPCcpF9IPF8g2NJCZPmzRhJtuakpCw/viewform"
-                target="_blank"
-                class="w-full bg-amber-500 text-white py-3 rounded-xl font-bold shadow-md inline-block text-center mt-2">අයදුම්
-                කරන්න <i class="fa-regular fa-hand-point-right ml-1 text-xs"></i></a>
+                class="text-white text-2xl focus:outline-none w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+                id="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
     <!-- Hero Slider Section -->
-    <section class="hero-container">
+    <section class="hero-container" id="hero-slider-section">
         <div class="slide">
             <!-- Item 1 -->
             <div class="item"
@@ -1227,11 +1335,11 @@
     </section>
 
     <!-- SECTION 1: SIVUMAGA DAHAM PASALA REGISTRATION SECTION -->
-    <section id="daham-pasala" class="py-24 bg-white relative overflow-hidden">
+    <section id="daham-pasala" class="py-24 bg-transparent relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-                <!-- වම්පස පාඨ සහ බොත්තම් (Slide In from Left) -->
+                <!-- වම්පස පාඨ සහ බොත්තම් -->
                 <div class="lg:col-span-5 text-center lg:text-left reveal-element reveal-slide-left">
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-800 mb-6 tracking-wide">
                         සිව්මග දහම් පාසැල
@@ -1241,34 +1349,27 @@
                         "නිවන මූලික කරගත් නිවැරදි අවබෝධයෙන් ලොව දකින ගුණ නැණ බෙලෙන් සපිරි උතුම්... දුදරු කැළක් ලොවට
                         දායාද කිරීම උදෙසා..."
                     </p>
-                    <a href="https://www.youtube.com/@siwmaga/featured" target="_blank"
-                        class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl text-[16px] shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 transition-all transform hover:-translate-y-0.5">
-                        <i class="fa-regular fa-hand-point-right text-lg"></i> අයදුම් කරන්න
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWwGPvcyp4KQhGs0ilMPCcpF9IPF8g2NJCZPmzRhJtuakpCw/viewform" target="_blank"
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white font-extrabold px-10 py-4.5 rounded-2xl text-[17px] shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 animate-shine btn-daham-apply">
+                        <i class="fa-regular fa-hand-point-right text-xl animate-bounce-horizontal"></i> අයදුම් කරන්න
                     </a>
                 </div>
 
-                <!-- දකුණුපස පින්තූර සැකසුම (Slide In from Right with progressive lazy loading) -->
-                <div
-                    class="lg:col-span-7 flex justify-center items-center py-2 sm:py-6 relative reveal-element reveal-slide-right delay-100">
-                    <div class="relative w-full max-w-lg h-[260px] sm:h-[400px] lg:h-[460px] mx-auto">
-
-                        <!-- Back Image (Top-Left) -->
-                        <div
-                            class="absolute top-0 left-0 w-[100%] h-[74%] rounded-[32px] overflow-hidden transition-all duration-500 hover:scale-[1.04] z-10 hover:z-30 group animate-float-img-1 bg-transparent">
+                <!-- දකුණුපස පින්තූර සැකසුම (Landscape Image and Logo without borders, shadows or background color) -->
+                <div class="lg:col-span-7 flex justify-center items-center py-8 relative reveal-element reveal-slide-right delay-100 w-full">
+                    <div class="relative w-full max-w-2xl aspect-[16/10] flex items-center justify-center animate-float-img-1">
+                        
+                        <!-- 1. ප්‍රධාන Landscape පින්තූරය (Updated with the specific URL and borders/shadows removed) -->
+                        <div class="w-full h-full rounded-[32px] overflow-hidden z-10 bg-transparent shimmer-skeleton">
                             <img data-src="https://lh3.googleusercontent.com/d/1WdJLhbtYYHCtA78aPrfam375wAhpUl5T"
-                                alt="සිව්මග දහම් පාසැල පින්තූරය 1" decoding="async"
-                                class="fade-in-ready lazy-image w-full h-full object-contain">
+                                alt="සිව්මග දහම් පාසැල" decoding="async"
+                                class="fade-in-ready lazy-image w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         </div>
 
-                        <!-- Front Image (Bottom-Right) -->
-                        <div
-                            class="absolute bottom-0 right-0 w-[50%] h-[50%] rounded-[32px] overflow-hidden transition-all duration-500 hover:scale-[1.04] z-20 hover:z-30 group animate-float-img-2 bg-transparent">
-                            <img data-src="https://lh3.googleusercontent.com/d/1kwKvcb4WZ1dtNgyg8ic0aXLo2Kq8bs2J"
-                                alt="සිව්මග දහම් පාසැල පින්තූරය 2" decoding="async"
-                                class="fade-in-ready lazy-image w-full h-full object-contain">
+                        <!-- 2. දහම් පාසලේ නිල ලාංඡනය (Borders, shadows, and bg-color removed) -->
+                        <div class="absolute right-4 -bottom-6 w-[28%] min-w-[100px] max-w-[140px] aspect-square rounded-[28px] overflow-hidden z-20 animate-badge-pulse flex items-center justify-center bg-transparent">
+                            <img src="https://lh3.googleusercontent.com/d/1kwKvcb4WZ1dtNgyg8ic0aXLo2Kq8bs2J" alt="දහම් පාසල් ලාංඡනය" class="w-full h-full object-contain">
                         </div>
-
-
 
                     </div>
                 </div>
@@ -1369,7 +1470,8 @@
 
         <div class="max-w-7xl mx-auto px-4 relative reveal-element reveal-fade-up delay-150">
             <div class="carousel-3d-container" id="carousel3d-container">
-                <div class="carousel-3d-viewport" id="carousel3d-viewport">
+                <div class="carousel-3d-viewport" id="carousel3d-viewport" tabindex="0" role="region"
+                    aria-label="Memory gallery carousel">
                     <!-- Dynamic Google Drive Slides (Loop-optimized) -->
                     <div class="carousel-3d-slide shimmer-skeleton"><img
                             data-src="https://lh3.googleusercontent.com/d/10IVue9koFthoTYkf5xybJ6RdW_8W3VeC"
@@ -1415,10 +1517,11 @@
             <!-- Dots Indicators -->
             <div class="dots-container-3d" id="carousel3d-dots"></div>
 
+            <!-- Focused / highlighted button with pulsating glow effect for scroll focus encouragement -->
             <div class="text-center mt-12">
                 <a target="_blank" href="gallery.html"
-                    class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-8 py-3.5 rounded-full text-base transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transform hover:-translate-y-1">
-                    <i class="fa-solid fa-photo-film text-base"></i>
+                    class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold px-9 py-4 rounded-full text-base transition-all shadow-lg shadow-amber-500/20 transform hover:-translate-y-1 animate-gallery-focus">
+                    <i class="fa-solid fa-photo-film text-base animate-pulse"></i>
                     මාධ්‍ය ගැලරිය වෙත
                 </a>
             </div>
@@ -1426,6 +1529,7 @@
     </section>
 
     <!-- SECTION 4: SIVUMAGA TIMETABLE SECTION -->
+    <!-- SECTION 4: SIVUMAGA TIMETABLE SECTION (UPDATED COLUMNS) -->
     <section id="timetable" class="py-24 bg-slate-50 border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Header (Theme Matched) -->
@@ -1443,16 +1547,29 @@
             <div class="hidden md:block reveal-element reveal-fade-up delay-100">
                 <!-- Timetable Interactive Controls -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-8 max-w-5xl mx-auto">
-                    <!-- Medium Selector Tabs -->
+                    <!-- Medium Selector Tabs (with updated Country Flags) -->
                     <div
-                        class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300 shadow-inner w-full sm:w-auto">
+                        class="flex bg-slate-200 p-1.5 rounded-2xl border border-slate-300 shadow-inner w-full sm:w-auto gap-2">
                         <button id="tab-sinhala" onclick="switchMedium('Sinhala')"
-                            class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md">
-                            සිංහල මාධ්‍යය
+                            class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2">
+                            <span>සිංහල මාධ්‍යය</span>
+                            <div class="flex items-center gap-1 bg-white/20 px-1.5 py-0.5 rounded-md">
+                                <img src="https://flagcdn.com/w20/lk.png" class="w-4 h-3 rounded-sm object-cover" alt="LK">
+                                <img src="https://flagcdn.com/w20/gb.png" class="w-4 h-3 rounded-sm object-cover" alt="UK">
+                                <img src="https://flagcdn.com/w20/au.png" class="w-4 h-3 rounded-sm object-cover" alt="AU">
+                                <img src="https://flagcdn.com/w20/it.png" class="w-4 h-3 rounded-sm object-cover" alt="IT">
+                            </div>
                         </button>
                         <button id="tab-english" onclick="switchMedium('English')"
-                            class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900">
-                            English Medium
+                            class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2">
+                            <span>English Medium</span>
+                            <div class="flex items-center gap-1 bg-slate-300/50 px-1.5 py-0.5 rounded-md">
+                                <img src="https://flagcdn.com/w20/lk.png" class="w-4 h-3 rounded-sm object-cover" alt="LK">
+                                <img src="https://flagcdn.com/w20/qa.png" class="w-4 h-3 rounded-sm object-cover" alt="QA">
+                                <img src="https://flagcdn.com/w20/ca.png" class="w-4 h-3 rounded-sm object-cover" alt="CA">
+                                <img src="https://flagcdn.com/w20/ie.png" class="w-4 h-3 rounded-sm object-cover" alt="IE">
+                                <span class="text-[10px]" title="International">🌐</span>
+                            </div>
                         </button>
                     </div>
 
@@ -1471,14 +1588,12 @@
                         <table class="en-custom-table" id="timetable-table">
                             <thead>
                                 <tr>
-                                    <th>මාධ්‍යය</th>
                                     <th>දරුවා වාසය කරන රට</th>
                                     <th>Online/ආරාමීය</th>
                                     <th>ස්ත්‍රී/පුරුෂ බව</th>
                                     <th>අංශය</th>
-                                    <th>අනු අංශය</th>
                                     <th>වයස් සීමාව</th>
-                                    <th>පැවැත්වෙන වේලාව</th>
+                                    <th>පැවැත්වෙන වේලාව (SL වේලාව)</th>
                                     <th>සම්බන්ධ වන්න</th>
                                 </tr>
                             </thead>
@@ -1544,7 +1659,7 @@
                 <!-- Main Featured Player Column (7/12) -->
                 <div class="lg:col-span-7">
                     <div class="bg-slate-950 p-3 sm:p-4 rounded-3xl shadow-2xl border border-slate-800/80 relative">
-                      
+
 
                         <!-- Light YouTube Facade (Saves 1.5MB on Initial Load!) -->
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-inner border border-white/5"
@@ -1592,7 +1707,7 @@
                             ජනප්‍රිය
                         </button>
                         <button id="tab-yt-shorts" onclick="switchYoutubeTab('shorts')"
-                            class="flex-1 py-3 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+                            class="flex-1 py-3 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5 font-bold">
                             කෙටි (Shorts)
                         </button>
                     </div>
@@ -1623,7 +1738,7 @@
 
     <!-- MOBILE TIME TABLE MODAL POPUP -->
     <div id="timetable-mobile-modal"
-        class="fixed inset-0 z-[100] overflow-y-auto hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        class="fixed inset-0 z-[100] overflow-y-auto hidden bg-black/70 backdrop-blur-md flex items-center justify-center p-0 sm:p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative transform scale-95 opacity-0 transition-all duration-300 flex flex-col"
             id="timetable-modal-content">
             <!-- Modal sticky header -->
@@ -1646,15 +1761,25 @@
                             class="fas fa-search"></i></span>
                 </div>
 
-                <!-- Toggle tab controls -->
-                <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300 shadow-inner w-full">
+                <!-- Toggle tab controls (with updated Mobile Flags) -->
+                <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300 shadow-inner w-full gap-2">
                     <button id="modal-tab-sinhala" onclick="switchMedium('Sinhala')"
-                        class="flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md">
-                        සිංහල මාධ්‍යය
+                        class="flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1">
+                        <span>සිංහල</span>
+                        <div class="flex items-center gap-0.5 bg-white/20 px-1 py-0.5 rounded">
+                            <img src="https://flagcdn.com/w20/lk.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="LK">
+                            <img src="https://flagcdn.com/w20/gb.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="UK">
+                            <img src="https://flagcdn.com/w20/au.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="AU">
+                        </div>
                     </button>
                     <button id="modal-tab-english" onclick="switchMedium('English')"
-                        class="flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900">
-                        English Medium
+                        class="flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1">
+                        <span>English</span>
+                        <div class="flex items-center gap-0.5 bg-slate-300/50 px-1 py-0.5 rounded">
+                            <img src="https://flagcdn.com/w20/lk.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="LK">
+                            <img src="https://flagcdn.com/w20/qa.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="QA">
+                            <img src="https://flagcdn.com/w20/ca.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="CA">
+                        </div>
                     </button>
                 </div>
 
@@ -1721,13 +1846,8 @@
                         <img class="w-full h-full object-cover fade-in-ready lazy-image"
                             data-src="https://lh3.googleusercontent.com/d/1gW2zRJjZwAfn8n_CILMeApSXutcsPEMP"
                             alt="දහම් පාසල් පුවත" decoding="async">
-                        <!-- <span
-                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">දහම්
-                            පාසල</span> -->
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <!-- <span class="text-slate-400 text-xs font-semibold mb-2"><i class="far fa-calendar-alt mr-1"></i>
-                            2026 මැයි 12</span> -->
                         <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">2026 අවුරුදු නිවාඩු නිවේදනය</h3>
                         <p class="text-slate-600 text-sm mb-5 line-clamp-3">සිංහල හා හින්දු අලුත් අවුරුද්ද නිමිත්තෙන්
                             සිව්මග ධර්මායතනයේ සියලුම පන්ති සඳහා අප්‍රේල් 05 සිට 18 දක්වා නිවාඩු ලබා දෙන බවත්,
@@ -1747,17 +1867,13 @@
                         <img class="w-full h-full object-cover fade-in-ready lazy-image"
                             data-src="https://lh3.googleusercontent.com/d/11MFy9Pj5DOrrYcjC71EmWHB6NxnQw58l"
                             alt="ප්‍රජා සත්කාර පුවත" decoding="async">
-                        <!-- <span
-                            class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">ප්‍රජා
-                            සත්කාර</span> -->
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <!-- <span class="text-slate-400 text-xs font-semibold mb-2"><i class="far fa-calendar-alt mr-1"></i>
-                            2026 අප්‍රේල් 28</span> -->
-                        <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">අඩු ආදායම්ලාභී පවුල් සඳහා වියළි
-                            සලාක සහ අත්‍යවශ්‍ය ද්‍රව්‍ය බෙදා දීමේ මහා පින්කම</h3>
-                        <p class="text-slate-600 text-sm mb-5 line-clamp-3">දහම් ප්‍රජාවගේ දායකත්වයෙන් සංවිධානය කළ මෙම
-                            සද්කාර්යය මඟින් දුෂ්කරතා මධ්‍යයේ වෙසෙන පවුල් 200කට අධික පිරිසකට සහන සැලසිනි...</p>
+                        <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">මිලියනයක් පිරිස වැලඳගත් 'මල්
+                            මැජික්' එක</h3>
+                        <p class="text-slate-600 text-sm mb-5 line-clamp-3">පෙති අටේ මලක් නටුවෙන් වෙන් කරද්දී මලට මොකද
+                            වුණේ? ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ, හේතු-ඵල දහම ගැන සරලව කියාදෙන මෙම අපූරු වීඩියෝව අදම
+                            නරඹන්න...</p>
                         <button onclick="openNewsModal('social-help')"
                             class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-sm flex items-center gap-1 group self-start">
                             වැඩිදුර කියවන්න <i
@@ -1773,16 +1889,12 @@
                         <img class="w-full h-full object-cover fade-in-ready lazy-image"
                             data-src="https://lh3.googleusercontent.com/d/1EicX0st1Zy9cgkQOt_FftjwLGL_OS-R_"
                             alt="භාවනා පුවත" decoding="async">
-                        <!-- <span
-                            class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">භාවනා</span> -->
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <!-- <span class="text-slate-400 text-xs font-semibold mb-2"><i class="far fa-calendar-alt mr-1"></i>
-                            2026 අප්‍රේල් 15</span> -->
                         <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">2026 නව අධ්‍යයන වර්ෂයේ ආරම්භය සහ
                             කාලසටහන</h3>
                         <p class="text-slate-600 text-sm mb-5 line-clamp-3">සිව්මග ධර්මායතනයේ 2026 නව අධ්‍යයන වර්ෂය
-                            ජනවාරි 03 වනදා සිට ආරම්භ වේ. නව වසරේ පන්ති වේලාවන්හි සංශෝධන පවතින බැවින්, අදාළ කාලසටහනට අනුව
+                            ජනවාරි 03 වනදා සිට ආරම්භ වේ. නව වසරේ පන්ති වේලාවන්හි සංශෝධන පවතින බැවින්, අදාළ කාලසටහනන අනුව
                             නියමිත වේලාවට දරුවන් සම්බන්ධ කිරීමට කාරුණික වන්න.</p>
                         <button onclick="openNewsModal('meditation-program')"
                             class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-sm flex items-center gap-1 group self-start">
@@ -1842,14 +1954,12 @@
             <div class="footer-content-grid">
                 <div class="f-col">
                     <div class="flex items-center gap-3 mb-5">
-                        <img src="https://lh3.googleusercontent.com/d/1do0QSkJms6sJTXgyWjAowwpxPSMIvcYk"
-                            alt="සිව්මග ධර්මායතනය ලාංඡනය"
-                            class="h-12 w-12 rounded-xl object-contain border border-cyan-500/25 shadow-md shadow-cyan-500/10"
-                            onerror="this.src='https://placehold.co/120x120/050c16/00eaff?text=SM'">
+                        <img src="SM l.png" alt="සිව්මග ධර්මායතනය ලාංඡනය" class="h-12 w-12 rounded-xl object-contain border border-cyan-500/25 shadow-md shadow-cyan-500/10" onerror="this.src='https://placehold.co/120x120/050c16/00eaff?text=SM'">
                         <h3 class="footer-h3" style="margin-bottom: 0;">සිව්මග ධර්මායතනය</h3>
                     </div>
                     <p class="f-desc">සම්බුදු දහමේ ආලෝකයෙන් දරු පරපුරේ හෙට දවස ආලෝකවත් කරන ගෝලීය අධ්‍යාපනික මෙහෙවර.</p>
-                    <div class="f-socials">
+                    
+                    <div class="f-socials hidden md:flex">
                         <a href="https://www.youtube.com/@siwmaga/featured" target="_blank" aria-label="Facebook"><i
                                 class="fab fa-facebook-f"></i></a>
                         <a href="https://www.youtube.com/@siwmaga" target="_blank" aria-label="Youtube"><i
@@ -1876,13 +1986,19 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>ජේතවනාරාම විහාරය, 356/3, නුගදන්ඩ, කලටුවාව.</span>
+                        <span>ජේතවනාරාම විහාරය, 356/3, นුගදන්ඩ, කලටුවාව.</span>
                     </div>
                 </div>
             </div>
 
+            <div class="md:hidden flex justify-center gap-5 mb-5 mt-8" id="mobile-only-socials">
+                <a href="https://www.youtube.com/@siwmaga/featured" target="_blank" class="w-11 h-11 bg-white/5 hover:bg-amber-500 hover:text-black text-white rounded-full flex items-center justify-center transition-all border border-white/10 shadow-lg" aria-label="Facebook"><i class="fab fa-facebook-f text-lg"></i></a>
+                <a href="https://www.youtube.com/@siwmaga" target="_blank" class="w-11 h-11 bg-white/5 hover:bg-amber-500 hover:text-black text-white rounded-full flex items-center justify-center transition-all border border-white/10 shadow-lg" aria-label="Youtube"><i class="fab fa-youtube text-lg"></i></a>
+                <a href="https://www.youtube.com/@siwmaga/featured" target="_blank" class="w-11 h-11 bg-white/5 hover:bg-amber-500 hover:text-black text-white rounded-full flex items-center justify-center transition-all border border-white/10 shadow-lg" aria-label="Whatsapp"><i class="fab fa-whatsapp text-lg"></i></a>
+            </div>
+
             <div class="footer-copyright">
-                <p>© 2026 සිව්මග ධර්මායතනය | නිර්මාණය: NIT Team</p>
+                <p>© 2026 סיව්මග ධර්මායතනය | නිර්මාණය: NIT IT Team</p>
             </div>
         </div>
     </footer>
@@ -1893,7 +2009,7 @@
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        window.onload = function() {
+        window.onload = function () {
             window.scrollTo(0, 0);
         };
 
@@ -2010,7 +2126,7 @@
             }
         }
 
-        // Hero Slider Navigation
+        // Hero Slider Navigation (Click transitions)
         const next = document.querySelector('.next-btn');
         const prev = document.querySelector('.prev-btn');
         const slider = document.querySelector('.slide');
@@ -2029,56 +2145,88 @@
             next.click();
         }, 7000);
 
+        function resetAutoSlide() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => {
+                next.click();
+            }, 7000);
+        }
+
         [next, prev].forEach(btn => {
-            btn.addEventListener('click', () => {
-                clearInterval(autoSlide);
-                autoSlide = setInterval(() => {
-                    next.click();
-                }, 7000);
-            });
+            btn.addEventListener('click', resetAutoSlide);
+        });
+
+        // Click thumbnail to make it active
+        slider.addEventListener('click', function (e) {
+            const clickedItem = e.target.closest('.item');
+            if (!clickedItem) return;
+
+            const items = Array.from(slider.querySelectorAll('.item'));
+            const index = items.indexOf(clickedItem);
+
+            if (index >= 2) {
+                for (let i = 0; i < index - 1; i++) {
+                    let currentItems = slider.querySelectorAll('.item');
+                    slider.appendChild(currentItems[0]);
+                }
+                resetAutoSlide();
+            }
+        });
+
+        // --- KEYBOARD ARROW KEY BINDINGS FOR MAIN SLIDER ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prev.click();
+                resetAutoSlide();
+            } else if (e.key === 'ArrowRight') {
+                next.click();
+                resetAutoSlide();
+            }
         });
     </script>
 
     <!-- TIMETABLE SYSTEM DATA & ACTIVE TIME VALIDATION -->
+    <!-- _STREAMING_CHUNK:Updating timetable data with local times... _ -->
     <script>
+        // Updated data with local time zones corresponding to each country
         const timetableData = [
             // Sinhala Medium (සිංහල මාධ්‍යය)
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ - ආරාමය", sub: "කණිෂ්ඨ", age: "අවු: 7 - 11", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-1", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ - ආරාමය", sub: "ජ්‍යෙෂ්ඨ", age: "අවු: 11 - 16", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-2", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි - ආරාමය", sub: "කණිෂ්ඨ", age: "අවු: 7 - 11", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-3", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි - ආරාමය", sub: "ජ්‍යෙෂ්ඨ", age: "අවු: 11 - 16", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-4", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 01", age: "අවු: 7", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-5", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 02", age: "අවු: 8", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-6", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 03", age: "අවු: 9", time: "ඉරිදා 3.30 - 5.00 pm", link: "https://zoom.us/mock-link-sivumaga-7", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 04", age: "අවු: 10", time: "ඉරිදා 3.30 - 5.00 pm", link: "https://zoom.us/mock-link-sivumaga-8", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 05", age: "අවු: 11", time: "ඉරිදා 3.30 - 5.00 pm", link: "https://zoom.us/mock-link-sivumaga-9", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 06", age: "අවු: 12", time: "ඉරිදා 3.30 - 5.00 pm", link: "https://zoom.us/mock-link-sivumaga-10", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 07", age: "අවු: 13", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-11", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 08", age: "අවු: 14", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-12", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "පියවර 09", age: "අවු: 15/16", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-13", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 01", age: "අවු: 7", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-14", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 02", age: "අවු: 8", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-15", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 03", age: "අවු: 9", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-16", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 04", age: "අවු: 10", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-17", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 05", age: "අවු: 11", time: "ඉරිදා. 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-18", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 06", age: "අවු: 12", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-19", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 07", age: "අවු: 13", time: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-20", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 08", age: "අවු: 14", time: "ඉරිදා. 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-21", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
-            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "පියවර 09", age: "අවු: 15/16", time: "ඉරිදා. 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-22", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
-            { med: "Sinhala", country: "එංගලන්තය 01", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", sub: "කණිෂ්ඨ", age: "අවු: 7 - 11", time: "ඉරිදා. 2:00 - 3:30 pm", link: "https://zoom.us/mock-link-sivumaga-23", day: 0, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
-            { med: "Sinhala", country: "එංගලන්තය 02", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", sub: "ජ්‍යෙෂ්ඨ", age: "අවු: 11 - 16", time: "ඉරිදා. 4:00 - 5:30 pm", link: "https://zoom.us/mock-link-sivumaga-24", day: 0, startHour: 16, startMin: 0, endHour: 17, endMin: 30 },
-            { med: "Sinhala", country: "ඔස්ට්‍රේලියාව", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", sub: "-", age: "අවු: 7 - 16", time: "ඉරිදා. 2:00 - 3:30 pm", link: "https://zoom.us/mock-link-sivumaga-25", day: 0, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
-            { med: "Sinhala", country: "ඉතාලිය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", sub: "-", age: "අවු: 7 - 16", time: "සෙන. 1:00 - 2:30 pm", link: "https://zoom.us/mock-link-sivumaga-26", day: 6, startHour: 13, startMin: 0, endHour: 14, endMin: 30 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ - ආරාමය", age: "අවු: 7 - 11", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-1", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ - ආරාමය", age: "අවු: 11 - 16", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-2", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි - ආරාමය", age: "අවු: 7 - 11", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-3", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි - ආරාමය", age: "අවු: 11 - 16", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-4", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 7", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-5", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 8", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-6", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 9", time: "ඉරිදා 3:30 - 5:00 pm", localTime: "ඉරිදා 3:30 - 5:00 pm", link: "https://zoom.us/mock-link-sivumaga-7", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 10", time: "ඉරිදා 3:30 - 5:00 pm", localTime: "ඉරිදා 3:30 - 5:00 pm", link: "https://zoom.us/mock-link-sivumaga-8", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 11", time: "ඉරිදා 3:30 - 5:00 pm", localTime: "ඉරිදා 3:30 - 5:00 pm", link: "https://zoom.us/mock-link-sivumaga-9", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 12", time: "ඉරිදා 3:30 - 5:00 pm", localTime: "ඉරිදා 3:30 - 5:00 pm", link: "https://zoom.us/mock-link-sivumaga-10", day: 0, startHour: 15, startMin: 30, endHour: 17, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 13", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-11", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 14", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-12", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 15/16", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-13", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 7", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-14", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 8", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-15", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 9", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-16", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 10", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-17", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 11", time: "ඉරිදා 7:00 - 8:30 pm", localTime: "ඉරිදා 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-18", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 12", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-19", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 13", time: "ඉරිදා 5:30 - 7:00 pm", localTime: "ඉරිදා 5:30 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-20", day: 0, startHour: 17, startMin: 30, endHour: 19, endMin: 0 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 14", time: "ඉරිදා 7:00 - 8:30 pm", localTime: "ඉරිදා 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-21", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
+            { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "Online", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 15/16", time: "ඉරිදා 7:00 - 8:30 pm", localTime: "ඉරිදා 7:00 - 8:30 pm", link: "https://zoom.us/mock-link-sivumaga-22", day: 0, startHour: 19, startMin: 0, endHour: 20, endMin: 30 },
+            { med: "Sinhala", country: "එංගලන්තය 01", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 7 - 11", time: "ඉරිදා 2:00 - 3:30 pm", localTime: "Sun. 9:30 - 11:00 am (BST)", link: "https://zoom.us/mock-link-sivumaga-23", day: 0, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
+            { med: "Sinhala", country: "එංගලන්තය 02", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 11 - 16", time: "ඉරිදා 4:00 - 5:30 pm", localTime: "Sun. 11:30 am - 1:00 pm (BST)", link: "https://zoom.us/mock-link-sivumaga-24", day: 0, startHour: 16, startMin: 0, endHour: 17, endMin: 30 },
+            { med: "Sinhala", country: "ඔස්ට්‍රේලියාව", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 7 - 16", time: "ඉරිදා 2:00 - 3:30 pm", localTime: "Sun. 6:30 - 8:00 pm (AEST)", link: "https://zoom.us/mock-link-sivumaga-25", day: 0, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
+            { med: "Sinhala", country: "ඉතාලිය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 7 - 16", time: "සෙන. 1:00 - 2:30 pm", localTime: "Sat. 9:30 - 11:00 am (CEST)", link: "https://zoom.us/mock-link-sivumaga-26", day: 6, startHour: 13, startMin: 0, endHour: 14, endMin: 30 },
 
             // English Medium (ඉංග්‍රීසි මාධ්‍යය)
-            { med: "English", country: "ශ්‍රී ලංකාව", type: "ආරාමය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", sub: "ඉංග්‍රීසි මාධ්‍යය", age: "අවු: 7 - 16", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-27", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "English", country: "ශ්‍රී ලංකාව", type: "ආරාමය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", sub: "ඉංග්‍රීසි මාධ්‍යය", age: "අවු: 7 - 16", time: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-28", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
-            { med: "English", country: "ඕනෑම රටක්", type: "Online", gender: "පුරුෂ", sec: "Siwmaga International", sub: "Boys", age: "අවු: 7 - 16", time: "සෙන. 12:30 - 2:00 pm", link: "https://zoom.us/mock-link-sivumaga-29", day: 6, startHour: 12, startMin: 30, endHour: 14, endMin: 0 },
-            { med: "English", country: "ඕනෑම රටක්", type: "Online", gender: "ස්ත්‍රී", sec: "Siwmaga International", sub: "Girls", age: "අවු: 7 - 16", time: "සෙන. 12:30 - 2:00 pm", link: "https://zoom.us/mock-link-sivumaga-30", day: 6, startHour: 12, startMin: 30, endHour: 14, endMin: 0 },
-            { med: "English", country: "කටාර් රාජ්‍යය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", sub: "Boys/Girls", age: "අවු: 7 - 16", time: "සිකු. 2:00 - 3:30 pm", link: "https://zoom.us/mock-link-sivumaga-31", day: 5, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
-            { med: "English", country: "කැනඩාව", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", sub: "Boys/Girls", age: "අවු: 7 - 12", time: "ඉරිදා. 8:00 - 09:30 pm", link: "https://zoom.us/mock-link-sivumaga-32", day: 0, startHour: 20, startMin: 0, endHour: 21, endMin: 30 },
-            { med: "English", country: "කැනඩාව 1", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", sub: "Boys/Girls", age: "අවු: 13 - 16", time: "ඉරිදා. 8:30 - 10:00 pm", link: "https://zoom.us/mock-link-sivumaga-33", day: 0, startHour: 20, startMin: 30, endHour: 22, endMin: 0 },
-            { med: "English", country: "අයර්ලන්තය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", sub: "Boys/Girls", age: "අවු: 06 - 16", time: "සෙන. 7:30 - 09:00 pm", link: "https://zoom.us/mock-link-sivumaga-34", day: 6, startHour: 19, startMin: 30, endHour: 21, endMin: 0 }
+            { med: "English", country: "ශ්‍රී ලංකාව", type: "ආරාමය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ", age: "අවු: 7 - 16", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-27", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "English", country: "ශ්‍රී ලංකාව", type: "ආරාමය", gender: "ස්ත්‍රී", sec: "සිව්මග දියණි", age: "අවු: 7 - 16", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-28", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
+            { med: "English", country: "ඕනෑම රටක්", type: "Online", gender: "පුරුෂ", sec: "Siwmaga International", age: "අවු: 7 - 16", time: "සෙන. 12:30 - 2:00 pm", localTime: "Sat. 7:00 - 8:30 am (UTC)", link: "https://zoom.us/mock-link-sivumaga-29", day: 6, startHour: 12, startMin: 30, endHour: 14, endMin: 0 },
+            { med: "English", country: "ඕනෑම රටක්", type: "Online", gender: "ස්ත්‍රී", sec: "Siwmaga International", age: "අවු: 7 - 16", time: "සෙන. 12:30 - 2:00 pm", localTime: "Sat. 7:00 - 8:30 am (UTC)", link: "https://zoom.us/mock-link-sivumaga-30", day: 6, startHour: 12, startMin: 30, endHour: 14, endMin: 0 },
+            { med: "English", country: "කටාර් රාජ්‍යය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 7 - 16", time: "සිකු. 2:00 - 3:30 pm", localTime: "Fri. 11:30 am - 1:00 pm (AST)", link: "https://zoom.us/mock-link-sivumaga-31", day: 5, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
+            { med: "English", country: "කැනඩාව", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 7 - 12", time: "ඉරිදා 8:00 - 9:30 pm", localTime: "Sun. 10:30 am - 12:00 pm (EDT)", link: "https://zoom.us/mock-link-sivumaga-32", day: 0, startHour: 20, startMin: 0, endHour: 21, endMin: 30 },
+            { med: "English", country: "කැනඩාව 1", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 13 - 16", time: "ඉරිදා 8:30 - 10:00 pm", localTime: "Sun. 11:00 am - 12:30 pm (EDT)", link: "https://zoom.us/mock-link-sivumaga-33", day: 0, startHour: 20, startMin: 30, endHour: 22, endMin: 0 },
+            { med: "English", country: "අයර්ලන්තය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 06 - 16", time: "සෙන. 7:30 - 9:00 pm", localTime: "Sat. 3:00 - 4:30 pm (IST)", link: "https://zoom.us/mock-link-sivumaga-34", day: 6, startHour: 19, startMin: 30, endHour: 21, endMin: 0 }
         ];
 
         let activeMedium = "Sinhala";
@@ -2113,8 +2261,9 @@
             } else {
                 document.getElementById('class-status-title').innerText = "පන්තිය තවමත් සක්‍රීය නැත";
                 document.getElementById('class-status-message').innerHTML = `
-                    <span class="font-extrabold text-slate-800">${item.country}</span> පන්තිය පැවැත්වෙන්නේ 
-                    <span class="font-extrabold text-amber-600">${item.time}</span> වේලාවන්හිදී පමණි.<br>
+                    <span class="font-extrabold text-slate-800">${item.country}</span> පන්තිය පැවැත්වෙන්නේ <br>
+                    ශ්‍රී ලංකා වේලාවෙන්: <span class="font-extrabold text-amber-600">${item.time}</span><br>
+                    ඔබේ දේශීය වේලාවෙන්: <span class="font-extrabold text-blue-600">${item.localTime}</span>.<br>
                     <span class="text-xs text-slate-400 mt-2 block">කරුණාකර නියමිත වේලාවට සම්බන්ධ වන්න.</span>
                 `;
                 openClassStatusModal();
@@ -2156,22 +2305,23 @@
             const mTabEnglish = document.getElementById("modal-tab-english");
 
             if (medium === "Sinhala") {
-                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md";
-                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900";
+                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2";
+                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2";
 
-                if (mTabSinhala) mTabSinhala.className = "flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md";
-                if (mTabEnglish) mTabEnglish.className = "flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900";
+                if (mTabSinhala) mTabSinhala.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1";
+                if (mTabEnglish) mTabEnglish.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1";
             } else {
-                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md";
-                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900";
+                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2";
+                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2";
 
-                if (mTabEnglish) mTabEnglish.className = "flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md";
-                if (mTabSinhala) mTabSinhala.className = "flex-1 text-sm font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900";
+                if (mTabEnglish) mTabEnglish.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1";
+                if (mTabSinhala) mTabSinhala.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1";
             }
 
             filterTimetable();
         }
 
+        /* --- STREAMING_CHUNK:Filtering timetable columns and removing the local time column... --- */
         function filterTimetable() {
             const desktopQuery = document.getElementById("timetable-search") ? document.getElementById("timetable-search").value.toLowerCase() : "";
             const modalQuery = document.getElementById("modal-timetable-search") ? document.getElementById("modal-timetable-search").value.toLowerCase() : "";
@@ -2188,8 +2338,7 @@
                 .filter(item => {
                     const matchesMedium = item.med === activeMedium;
                     const matchesQuery = item.country.toLowerCase().includes(query) ||
-                        item.sec.toLowerCase().includes(query) ||
-                        item.sub.toLowerCase().includes(query);
+                        item.sec.toLowerCase().includes(query);
                     return matchesMedium && matchesQuery;
                 });
 
@@ -2232,11 +2381,12 @@
                                 <div><span class="font-bold text-slate-700">ස්ත්‍රී/පුරුෂ:</span> ${item.gender}</div>
                                 <div><span class="font-bold text-slate-700">වයස:</span> ${item.age}</div>
                                 <div class="col-span-2"><span class="font-bold text-slate-700">අංශය:</span> ${item.sec}</div>
-                                <div class="col-span-2"><span class="font-bold text-slate-700">අනු අංශය:</span> ${item.sub}</div>
                             </div>
-                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold text-slate-500">වේලාව (SL):</span>
-                                <span class="text-xs font-bold text-slate-700">${item.time}</span>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1.5 mb-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-slate-500">ශ්‍රී ලංකා වේලාව:</span>
+                                    <span class="text-xs font-bold text-amber-600">${item.time}</span>
+                                </div>
                             </div>
                             <button onclick="handleJoinClass(${item.originalIndex})" class="w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-xs transition-all shadow-sm active:scale-95 ${btnClass}">
                                 ${btnLabel}
@@ -2247,7 +2397,7 @@
                 });
             }
 
-            // Desktop table rows
+            // Desktop table rows (removed "මාධ්‍යය", "අනු අංශය" & "දේශීය වේලාව", added "SL වේලාව")
             if (desktopTableBody) {
                 desktopTableBody.innerHTML = '';
                 filteredData.forEach((item, index) => {
@@ -2261,19 +2411,12 @@
                         ? `<span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span></span> සම්බන්ධ වන්න`
                         : `<i class="fa-solid fa-lock text-[10px] text-slate-400"></i> අගුළු දමා ඇත`;
 
-                    let rowspanHTML = '';
-                    if (index === 0) {
-                        rowspanHTML = `<td class="medium-column-en" rowspan="${filteredData.length}">${activeMedium === 'Sinhala' ? 'සිංහල' : 'English'}</td>`;
-                    }
-
                     const rowHTML = `
                         <tr class="t-row t-${activeMedium.toLowerCase()}">
-                            ${rowspanHTML}
                             <td class="font-semibold text-slate-800">${item.country}</td>
                             <td><span class="status-badge ${badgeClass}">${item.type}</span></td>
                             <td>${item.gender}</td>
                             <td>${item.sec}</td>
-                            <td>${item.sub}</td>
                             <td class="font-medium text-slate-700">${item.age}</td>
                             <td class="font-bold text-amber-600 text-xs">${item.time}</td>
                             <td>
@@ -2307,14 +2450,14 @@
         }
 
         function closeTimetableModal() {
-            const modal = document.getElementById('timetable-mobile-modal');
-            const content = document.getElementById('timetable-modal-content');
+            const modalBox = document.getElementById('timetable-mobile-modal');
+            const contentBox = document.getElementById('timetable-modal-content');
 
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
+            contentBox.classList.remove('scale-100', 'opacity-100');
+            contentBox.classList.add('scale-95', 'opacity-0');
 
             setTimeout(() => {
-                modal.classList.add('hidden');
+                modalBox.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }, 300);
         }
@@ -2413,11 +2556,10 @@
                         slide.style.transition = 'none';
                         void slide.offsetHeight;
                     } else {
-                        slide.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease, filter 0.8s ease';
+                        slide.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease, filter 0.85s ease';
                     }
                     slide.dataset.prevOffset = offset;
 
-                    // translate3d trigger GPU core 
                     slide.style.transform = `translate3d(${translateX}px, 0, ${-absOffset * 40}px) scale(${scale}) rotateY(${rotateY}deg)`;
 
                     if (absOffset === 0) {
@@ -2450,16 +2592,18 @@
                 }, 5000);
             }
 
-            nextBtn.addEventListener('click', () => {
-                virtualIndex++;
+            function goToSlide(direction) {
+                virtualIndex += direction;
                 updateCarousel();
                 resetAutoplayTimer();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                goToSlide(1);
             });
 
             prevBtn.addEventListener('click', () => {
-                virtualIndex--;
-                updateCarousel();
-                resetAutoplayTimer();
+                goToSlide(-1);
             });
 
             slides.forEach((slide, idx) => {
@@ -2469,15 +2613,18 @@
                         let diff = idx - realIndex;
                         if (diff < -totalSlides / 2) diff += totalSlides;
                         if (diff > totalSlides / 2) diff -= totalSlides;
-                        virtualIndex += diff;
-                        updateCarousel();
-                        resetAutoplayTimer();
+                        goToSlide(diff);
                     }
                 });
             });
 
             let touchStartX = 0;
             let touchEndX = 0;
+            let lastWheelTime = 0;
+
+            function moveCarousel(direction) {
+                goToSlide(direction);
+            }
 
             viewport.addEventListener('touchstart', (e) => {
                 touchStartX = e.changedTouches[0].screenX;
@@ -2488,14 +2635,39 @@
                 handleSwipe();
             }, { passive: true });
 
+            viewport.addEventListener('click', () => {
+                viewport.focus();
+            });
+
+            viewport.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    moveCarousel(1);
+                    resetAutoplayTimer();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    moveCarousel(-1);
+                    resetAutoplayTimer();
+                }
+            });
+
+            viewport.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+
+                const now = Date.now();
+                if (now - lastWheelTime < 160) return;
+
+                e.preventDefault();
+                lastWheelTime = now;
+                moveCarousel(e.deltaY > 0 ? 1 : -1);
+                resetAutoplayTimer();
+            }, { passive: false });
+
             function handleSwipe() {
                 const diff = touchStartX - touchEndX;
                 if (Math.abs(diff) > 40) {
-                    if (diff > 0) {
-                        nextBtn.click();
-                    } else {
-                        prevBtn.click();
-                    }
+                    moveCarousel(diff > 0 ? 1 : -1);
+                    resetAutoplayTimer();
                 }
             }
 
@@ -2531,20 +2703,17 @@
                     thumb: "https://img.youtube.com/vi/xvbuizKzpuA/0.jpg",
                     type: "video"
                 }
-
-
-
             ],
             popular: [
                 { id: "UomBOw-x0Zc", title: "තරුණ පරපුරට ජීවිතය දිනන්නට දහම් උපදෙස්", desc: "නැරඹුම් වාර දහස් ගණනක් පසුකළ විශිෂ්ට දේශනාව", thumb: "https://img.youtube.com/vi/UomBOw-x0Zc/0.jpg", type: "video" },
                 { id: "ZMtJvYUMaSc", title: "නිවැරදි මාවත සොයායන තාරුණ්‍යයට බුදු දහම", desc: "නූතන සමාජයට ගැළපෙන සැබෑ දහම් සන්නිවේදනය", thumb: "https://img.youtube.com/vi/ZMtJvYUMaSc/0.jpg", type: "video" },
                 { id: "niRsWkJ9Ccs", title: "පවුලේ සැමට සැනසීම ළඟා කරන ආශිර්වාද සෙත් පිරිත්", desc: "නිවසට සෞභාග්‍යය උදා කරන බලසම්පන්න සජ්ඣායනය", thumb: "https://img.youtube.com/vi/niRsWkJ9Ccs/0.jpg", type: "video" },
-                { id: "QyQTGBvo6aQ", title: "කුඩා දරුවන්ගේ ගුණධර්ම වර්ධනය කරන දහම් පාසල් පාඩම්", desc: "පුංචි දූ දරුවන් වෙනුවෙන්ම සකස් කළ දහම් අත්වැල", thumb: "https://img.youtube.com/vi/QyQTGBvo6aQ/0.jpg", type: "video" }
+                { id: "QyQTGBvo6aQ", title: "කුඩා දරුවන්ගේ ගුණධර්ම වර්ධනය කරන දහම් පන්ති", desc: "පුංචි දූ දරුවන් වෙනුවෙන්ම සකස් කළ දහම් අත්වැල", thumb: "https://img.youtube.com/vi/QyQTGBvo6aQ/0.jpg", type: "video" }
             ],
             shorts: [
                 { id: "Mqeo5XQ85tU", title: "තත්පර 60න් සිත එකඟ කරගන්නා විශ්මිත ක්‍රමය", desc: "🔥 1 MILLION+ VIEWS! ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ කෙටි දේශනාව", thumb: "https://img.youtube.com/vi/Mqeo5XQ85tU/0.jpg", type: "short", special: true },
                 { id: "fq77AgjStUg", title: "යහපත් ජීවිතයකට පුංචි දහම් පණිවිඩයක්", desc: "තරුණ සිතුවිලි නිවැරදි දිශාවට මෙහෙයවන්නට", thumb: "https://img.youtube.com/vi/fq77AgjStUg/0.jpg", type: "short" },
-                { id: "Rm7eVI_ZjIg", title: "අපහසු අවස්ථාවන්හිදී නොසැලී සිටින්නේ කෙසේද?", desc: "ලොව්තුරු දහමෙන් ජීවිතයට ශක්තියක්", thumb: "https://img.youtube.com/vi/Rm7eVI_ZjIg/0.jpg", type: "short" },
+                { id: "Rm7eVI_ZjIg", title: "අපහසු අවස්ථාවන්හිදී නොසැලී සිටින්නේ كෙසේද?", desc: "ලොව්තුරු දහමෙන් ජීවිතයට ශක්තියක්", thumb: "https://img.youtube.com/vi/Rm7eVI_ZjIg/0.jpg", type: "short" },
                 { id: "gTIUlD3ZMtM", title: "පුංචි දරුවන්ට ආදර්ශවත් බෞද්ධ කතාවක්", desc: "ගුණධර්ම පිරි සදාචාරවත් දරු පරපුරක් උදෙසා", thumb: "https://img.youtube.com/vi/gTIUlD3ZMtM/0.jpg", type: "short" }
             ]
         };
@@ -2665,7 +2834,6 @@
             const footer = document.getElementById('footer');
             let isMapLoaded = false;
 
-            // Smart Loading: Only initialize map when footer is close to screen viewport
             const footerObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !isMapLoaded) {
@@ -2680,7 +2848,6 @@
 
             async function loadD3LibraryAndMap() {
                 try {
-                    // Inject D3.js and TopoJSON dynamically from high reliability CDNs
                     await loadScript("https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js");
                     await loadScript("https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js");
 
@@ -2714,7 +2881,6 @@
                     .translate([width / 2, height / 1.5]);
                 const path = d3.geoPath().projection(projection);
 
-                // Fetch TopoJSON world atlas via CORS-safe CDN
                 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
                     .then(worldData => {
                         const countries = topojson.feature(worldData, worldData.objects.countries);
