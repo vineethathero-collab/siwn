@@ -1381,7 +1381,7 @@
                 style="background-image: url('https://lh3.googleusercontent.com/d/16Ls7TupJRo6ahCZE5Wds2vzeRCrEZNAi');">
                 <div class="content">
                     <div class="name">නිවන කරා පියවරක්</div>
-                    <div class="des">උතුම් වූ ශ්‍රී සද්ධර්මය ශ්‍රවණය කරමින් පාරමී දම් පුරන්නට ඔබත් එක්වන්න.</div>
+                    <div class="des">උතුම් වූ ශ්‍රї සද්ධර්මය ශ්‍රවණය කරමින් පාරමී දම් පුරන්නට ඔබත් එක්වන්න.</div>
                     <button onclick="scrollToSection('services')">වැඩි විස්තර</button>
                 </div>
             </div>
@@ -1419,6 +1419,15 @@
                     <div class="name">සමාජ සත්කාරය</div>
                     <div class="des">පරාර්ථය උදෙසා කැපවුණු පින්බර වැඩසටහන් මාලාවට සම්බන්ධ වන්න.</div>
                     <button onclick="scrollToSection('services')">වැඩි විස්තර</button>
+                </div>
+            </div>
+            <!-- Item 6 (Japan Medium Class) -->
+            <div class="item"
+                style="background-image: url('https://lh3.googleusercontent.com/d/1phW4x7m71NnUqVU-RUSf8pj-yleLN5XW');">
+                <div class="content">
+                    <div class="name">ජපන් මාධ්‍ය දහම් පියස</div>
+                    <div class="des">නැගී එන හිරුගේ දේශයේ (Japan) වෙසෙන දූ දරුවන්ට සදහම් ආලෝකය තිළිණ කරමින් ජපන් මාධ්‍යයෙන් පැවැත්වෙන නවතම දහම් පන්ති මාලාව.</div>
+                    <button onclick="scrollToSection('timetable'); switchMedium('Japan');">කාලසටහන බලන්න</button>
                 </div>
             </div>
         </div>
@@ -1953,86 +1962,38 @@
                 <p class="text-slate-600 font-medium">සිව්මග ධර්මායතනයේ නවතම තොරතුරු සහ ඉදිරි වැඩසටහන් පිළිබඳ නිවේදන</p>
             </div>
 
-            <!-- News Grid -->
-            <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- News Card 1 -->
-                <div
-                    class="news-card bg-white rounded-3xl overflow-hidden shadow-md flex flex-col reveal-element reveal-scale-up delay-100">
-                    <div class="relative h-48 overflow-hidden shimmer-skeleton">
-                        <img class="w-full h-full object-cover fade-in-ready lazy-image"
-                            data-src="https://lh3.googleusercontent.com/d/1gW2zRJjZwAfn8n_CILMeApSXutcsPEMP"
-                            alt="දහම් පාසල් පුවත" decoding="async">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">2026 අවුරුදු නිවාඩු නිවේදනය</h3>
-                        <p class="text-slate-600 text-sm mb-5 line-clamp-3">සිංහල හා හින්දු අලුත් අවුරුද්ද නිමිත්තෙන්
-                            සිව්මග ධර්මායතනයේ සියලුම පන්ති සඳහා අප්‍රේල් 05 සිට 18 දක්වා නිවාඩු ලබා දෙන බවත්,
-                            අප්‍රේල් 18 වනදා සිට පන්ති නැවත ආරම්භ වන බවත් කාරුණිකව දන්වා සිටිමු.</p>
-                        <button onclick="openNewsModal('school-reg')"
-                            class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-sm flex items-center gap-1 group self-start">
-                            වැඩිදුර කියවන්න <i
-                                class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
-                    </div>
+            <!-- News Slider Container (With absolute arrow buttons) -->
+            <div class="relative max-w-6xl mx-auto overflow-hidden group/news px-4 py-2">
+                <!-- News Drag Track -->
+                <div id="news-track" class="flex gap-6 transition-transform duration-500 ease-out select-none cursor-grab">
+                    <!-- Cards will be dynamically injected here using JavaScript for smooth infinite looping -->
                 </div>
-
-                <!-- News Card 2 -->
-                <div
-                    class="news-card bg-white rounded-3xl overflow-hidden shadow-md flex flex-col reveal-element reveal-scale-up delay-200">
-                    <div class="relative h-48 overflow-hidden shimmer-skeleton">
-                        <img class="w-full h-full object-cover fade-in-ready lazy-image"
-                            data-src="https://lh3.googleusercontent.com/d/11MFy9Pj5DOrrYcjC71EmWHB6NxnQw58l"
-                            alt="ප්‍රජා සත්කාර පුවත" decoding="async">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">මිලියනයක් පිරිස වැලඳගත් 'මල්
-                            මැජික්' එක</h3>
-                        <p class="text-slate-600 text-sm mb-5 line-clamp-3">පෙති අටේ මලක් නටුවෙන් වෙන් කරද්දී මලට මොකද
-                            වුණේ? ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ, හේතු-ඵල දහම ගැන සරලව කියාදෙන මෙම අපූරු වීඩියෝව අදම
-                            නරඹන්න...</p>
-                        <button onclick="openNewsModal('social-help')"
-                            class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-sm flex items-center gap-1 group self-start">
-                            වැඩිදුර කියවන්න <i
-                                class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- News Card 3 -->
-                <div
-                    class="news-card bg-white rounded-3xl overflow-hidden shadow-md flex flex-col reveal-element reveal-scale-up delay-300">
-                    <div class="relative h-48 overflow-hidden shimmer-skeleton">
-                        <img class="w-full h-full object-cover fade-in-ready lazy-image"
-                            data-src="https://lh3.googleusercontent.com/d/1EicX0st1Zy9cgkQOt_FftjwLGL_OS-R_"
-                            alt="භාවනා පුවත" decoding="async">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-lg font-bold text-slate-800 mb-3 line-clamp-2">2026 නව අධ්‍යයන වර්ෂයේ ආරම්භය සහ
-                            කාලසටහන</h3>
-                        <p class="text-slate-600 text-sm mb-5 line-clamp-3">සිව්මග ධර්මායතනයේ 2026 නව අධ්‍යයන වර්ෂය
-                            ජනවාරි 03 වනදා සිට ආරම්භ වේ. නව වසරේ පන්ති වේලාවන්හි සංශෝධන පවතින බැවින්, අදාළ කාලසටහනන අනුව
-                            නියමිත වේලාවට දරුවන් සම්බන්ධ කිරීමට කාරුණික වන්න.</p>
-                        <button onclick="openNewsModal('meditation-program')"
-                            class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-sm flex items-center gap-1 group self-start">
-                            වැඩිදුර කියවන්න <i
-                                class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
-                    </div>
-                </div>
+                
+                <!-- Navigation Buttons -->
+                <button id="news-prev" class="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-lg border border-slate-200 flex items-center justify-center transition-all opacity-0 group-hover/news:opacity-100 focus:opacity-100 z-20 hover:scale-105 active:scale-95">
+                    <i class="fas fa-chevron-left text-sm text-slate-700"></i>
+                </button>
+                <button id="news-next" class="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-lg border border-slate-200 flex items-center justify-center transition-all opacity-0 group-hover/news:opacity-100 focus:opacity-100 z-20 hover:scale-105 active:scale-95">
+                    <i class="fas fa-chevron-right text-sm text-slate-700"></i>
+                </button>
+                
+                <!-- Dots indicators -->
+                <div id="news-dots" class="flex justify-center gap-2 mt-8"></div>
             </div>
         </div>
     </section>
 
     <!-- NEWS DETAILED MODAL POPUP -->
     <div id="news-modal"
-        class="fixed inset-0 z-50 overflow-y-auto hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        class="fixed inset-0 z-[100] overflow-y-auto hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative transform scale-95 opacity-0 transition-all duration-300"
             id="news-modal-content">
             <button onclick="closeNewsModal()"
-                class="absolute top-4 right-4 w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full flex items-center justify-center transition-colors">
+                class="absolute top-4 right-4 w-10 h-10 bg-slate-900/10 hover:bg-slate-900/20 text-slate-700 rounded-full flex items-center justify-center transition-colors z-10">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="h-64 sm:h-72 w-full overflow-hidden">
+            <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
                 <img id="modal-img" class="w-full h-full object-cover" src="" alt="පුවත් රූපය">
             </div>
             <div class="p-8">
@@ -2102,7 +2063,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>ජේතවනාරාම විහාරය, 356/3, นුගදන්ඩ, කලටුවාව.</span>
+                        <span>ජේතවනාරාම විහාරය, 356/3, නුගදන්ඩ, කලටුවාව.</span>
                     </div>
                 </div>
             </div>
@@ -2114,7 +2075,7 @@
             </div>
 
             <div class="footer-copyright">
-                <p>© 2026 סיව්මග ධර්මායතනය | නිර්මාණය: NIT IT Team</p>
+                <p>© 2026 සිව්මග ධර්මායතනය | නිර්මාණය: NIT IT Team</p>
             </div>
         </div>
     </footer>
@@ -3103,6 +3064,343 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             switchYoutubeTab('latest');
+        });
+    </script>
+
+    <!-- INTERACTIVE LOOPABLE NEWS CAROUSEL LOGIC -->
+    <script>
+        // High Quality News & Announcement Dataset (Featuring the new Japan Medium Class)
+        const newsDataset = {
+            'japan-class': {
+                title: "හිරු නැගෙන දේශයට සදහම් සිසිලස - නව ජපන් මාධ්‍ය දහම් පාසල",
+                date: "2026 ජූලි 12",
+                badge: "නව පන්ති ආරම්භය",
+                image: "watermarked_img_11858449131179715464.png",
+                desc: "ජපානයේ වෙසෙන ආදරණීය සිංහල දූ දරුවන් උදෙසා සුවිශේෂී ලෙස ජපන් මාධ්‍යයෙන් (Japanese Medium) පවත්වනු ලබන නවතම දහම් පන්ති මාලාව මෙම සතියේ සිට ආරම්භ වේ.",
+                text: [
+                    "සිව්මග ධර්මායතනය මගින් නැගී එන හිරුගේ දේශය වන ජපානයේ (Japan) වෙසෙන දූ දරුවන්ට සදහම් ආලෝකය තිළිණ කරමින් ජපන් මාධ්‍යයෙන් පැවැත්වෙන නවතම දහම් පන්ති මාලාව මෙම සතියේ සිට ඇරඹේ.",
+                    "ජපන් සමාජයේ හැදී වැඩෙන දරුවන්ට වඩාත් පහසුවෙන් තේරුම් ගත හැකි පරිදි සරල ජපන් මාධ්‍යයෙන් (Japanese Medium) බුදු දහමේ සාරධර්ම, බෞද්ධ ඉතිහාසය සහ ප්‍රතිපත්ති පූජාවන් මෙහිදී ආකර්ෂණීය ලෙස සාකච්ඡා කෙරේ.",
+                    "වයස අවුරුදු 6-10 සහ අවුරුදු 11-16 ලෙස වයස් කාණ්ඩ දෙකක් යටතේ සෑම ඉරිදා දිනකම ශ්‍රී ලංකා වේලාවෙන් දහවල් 12:00 සිට 01:00 දක්වා (ජපාන වේලාවෙන් පස්වරු 3:30 - 4:30) Online (Zoom) තාක්ෂණය ඔස්සේ මෙම පන්ති පැවැත්වෙනු ඇත."
+                ]
+            },
+            'school-reg': {
+                title: "2026 අවුරුදු නිවාඩු නිවේදනය",
+                date: "2026 අප්‍රේල් 01",
+                badge: "විශේෂ නිවේදන",
+                image: "https://lh3.googleusercontent.com/d/1gW2zRJjZwAfn8n_CILMeApSXutcsPEMP",
+                desc: "සිංහල හා හින්දු අලුත් අවුරුද්ද නිමිත්තෙන් සිව්මග ධර්මායතනයේ සියලුම පන්ති සඳහා අප්‍රේල් 05 සිට 18 දක්වා නිවාඩු ලබා දෙන බවත්, අප්‍රේල් 18 වනදා සිට පන්ති නැවත ආරම්භ වන බවත් දන්වා සිටිමු.",
+                text: [
+                    "සිංහල හා හින්දු අලුත් අවුරුද්ද නිමිත්තෙන් සිව්මග ධර්මායතනයේ සියලුම පන්ති සඳහා අප්‍රේල් 05 සිට 18 දක්වා නිවාඩු ලබා දෙන බව කාරුණිකව දන්වා සිටිමු.",
+                    "මෙම කාල සීමාව තුළ දරුවන් නිවෙස්වල රැඳී සිටිමින් දෙමාපියන් සමඟ එක්ව බොදු සිරිත් විරිත්වලට මුල් තැන දෙමින් අවුරුදු සැමරීමටත්, සදාචාර සම්පන්න හැසිරීම් පුරුදු කිරීමටත් උනන්දු කරවන්න.",
+                    "අප්‍රේල් 18 වනදායින් පසුව නැවත සුපුරුදු පරිදි කාලසටහනට අනුව පන්ති ආරම්භ වන බව සලකන්න."
+                ]
+            },
+            'social-help': {
+                title: "මිලියනයක් පිරිස වැලඳගත් 'මල් මැජික්' එක",
+                date: "2026 මාර්තු 15",
+                badge: "දහම් නිර්මාණ",
+                image: "https://lh3.googleusercontent.com/d/11MFy9Pj5DOrrYcjC71EmWHB6NxnQw58l",
+                desc: "පෙති අටේ මලක් නටුවෙන් වෙන් කරද්දී මලට මොකද වුණේ? ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ, හේතු-ඵල දහම ගැන සරලව කියාදෙන මෙම අපූරු වීඩියෝව අදම නරඹන්න...",
+                text: [
+                    "පෙති අටේ මලක් නටුවෙන් වෙන් කරද්දී මලට මොකද වුණේ? ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ, හේතු-ඵල දහම ගැන සරලව කියාදෙන මෙම අපූරු වීඩියෝව අදම නරඹන්න.",
+                    "පෙති අටක් ඇති මලක් නටුවෙන් වෙන් කරද්දී එහි පැවැත්මට සිදුවන වෙනස්කම් සහ විශ්වයේ ක්‍රියාත්මක වන හේතු-ඵල සම්බන්ධය ළමා මනසට පහසුවෙන් අවබෝධ කරගත හැකි සරල විද්‍යාත්මක ආදර්ශනයකින් මෙහි දක්වා ඇත."
+                ]
+            },
+            'meditation-program': {
+                title: "2026 නව අධ්‍යයන වර්ෂයේ ආරම්භය සහ කාලසටහන",
+                date: "2026 ජනවාරි 03",
+                badge: "නව වසරේ ඇරඹුම",
+                image: "https://lh3.googleusercontent.com/d/1EicX0st1Zy9cgkQOt_FftjwLGL_OS-R_",
+                desc: "සිව්මග ධර්මායතනයේ 2026 නව අධ්‍යයන වර්ෂය ජනවාරි 03 වනදා සිට ආරම්භ වේ. නව වසරේ පන්ති වේලාවන්හි සංශෝධන පවතින බැවින්, අදාළ කාලසටහනන අනුව දරුවන් සම්බන්ධ කිරීමට කාරුණික වන්න.",
+                text: [
+                    "සිව්මග ධර්මායතනයේ 2026 නව අධ්‍යයන වර්ෂය ජනවාරි 03 වනදා සිට ආරම්භ වේ. නව වසරේ පන්ති වේලාවන්හි සංශෝධන පවතින බැවින්, අදාළ කාලසටහනන අනුව දරුවන් සම්බන්ධ කිරීමට කාරුණික වන්න.",
+                    "නව වසරේ දරුවන්ගේ දහම් දැනුම හා ගුණධර්ම වර්ධනය වෙනුවෙන් සතිපතා පැවැත්වෙන පන්ති පැවැත්වෙන වේලාවන් සහ සබැඳි කාලසටහන මඟින් පහසුවෙන් සොයාගත හැක."
+                ]
+            }
+        };
+
+        const newsKeys = Object.keys(newsDataset);
+        let newsCarouselIndex = 0;
+        let isNewsDragging = false;
+        let newsStartX = 0;
+        let newsCurrentX = 0;
+        let newsDragOffset = 0;
+        let isNewsClickPrevented = false;
+
+        function renderNewsCards() {
+            const track = document.getElementById('news-track');
+            if (!track) return;
+            track.innerHTML = '';
+
+            newsKeys.forEach(key => {
+                const item = newsDataset[key];
+                const card = `
+                    <div class="news-card flex-shrink-0 bg-white rounded-3xl overflow-hidden shadow-md flex flex-col border border-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                        <div class="relative h-48 overflow-hidden shimmer-skeleton bg-slate-200">
+                            <img class="w-full h-full object-cover lazy-image fade-in-ready"
+                                data-src="${item.image}"
+                                alt="${item.title}" decoding="async">
+                            <span class="absolute top-4 left-4 bg-amber-500 text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md z-10">${item.badge}</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="text-slate-400 text-[11px] font-bold mb-2 flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i> <span>${item.date}</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-800 mb-3 line-clamp-2 leading-snug">${item.title}</h3>
+                            <p class="text-slate-600 text-xs mb-5 line-clamp-3 leading-relaxed">${item.desc}</p>
+                            <button onclick="openNewsModal('${key}')"
+                                class="mt-auto text-amber-600 hover:text-amber-700 font-bold text-xs flex items-center gap-1 group self-start transition-colors">
+                                වැඩිදුර කියවන්න <i class="fas fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                track.innerHTML += card;
+            });
+
+            // Re-apply image lazy loading for dynamic elements
+            const lazyImages = track.querySelectorAll('.lazy-image');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.onload = () => {
+                                img.parentElement.classList.remove('shimmer-skeleton');
+                                img.classList.add('loaded');
+                            };
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '0px 0px 200px 0px' });
+            lazyImages.forEach(img => imageObserver.observe(img));
+
+            buildNewsDots();
+            updateNewsSlider();
+        }
+
+        function getNewsVisibleCount() {
+            if (window.innerWidth < 640) return 1;
+            if (window.innerWidth < 1024) return 2;
+            return 3;
+        }
+
+        function buildNewsDots() {
+            const dotsContainer = document.getElementById('news-dots');
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            
+            const visibleCount = getNewsVisibleCount();
+            const totalSteps = Math.max(1, newsKeys.length - visibleCount + 1);
+
+            for (let i = 0; i < totalSteps; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ' + 
+                    (i === newsCarouselIndex ? 'bg-amber-500 w-6' : 'bg-slate-300 hover:bg-slate-400');
+                dot.addEventListener('click', () => {
+                    newsCarouselIndex = i;
+                    updateNewsSlider();
+                    resetNewsAutoplay();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateNewsSlider() {
+            const track = document.getElementById('news-track');
+            if (!track) return;
+
+            const visibleCount = getNewsVisibleCount();
+            const totalSteps = Math.max(1, newsKeys.length - visibleCount + 1);
+
+            if (newsCarouselIndex >= totalSteps) {
+                newsCarouselIndex = 0;
+            } else if (newsCarouselIndex < 0) {
+                newsCarouselIndex = totalSteps - 1;
+            }
+
+            const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth : 0;
+            const gap = 24; // Equivalent to gap-6
+            let translateValue = newsCarouselIndex * (cardWidth + gap);
+
+            if (isNewsDragging) {
+                translateValue += newsDragOffset;
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            }
+
+            track.style.transform = `translate3d(${-translateValue}px, 0, 0)`;
+
+            // Update active dot
+            const dots = document.querySelectorAll('#news-dots div');
+            dots.forEach((dot, idx) => {
+                if (idx === newsCarouselIndex) {
+                    dot.className = 'w-6 h-2 rounded-full cursor-pointer transition-all duration-300 bg-amber-500';
+                } else {
+                    dot.className = 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 bg-slate-300 hover:bg-slate-400';
+                }
+            });
+        }
+
+        // Slide logic & Touch-to-swipe handling
+        const prevBtn = document.getElementById('news-prev');
+        const nextBtn = document.getElementById('news-next');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                newsCarouselIndex--;
+                updateNewsSlider();
+                resetNewsAutoplay();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                newsCarouselIndex++;
+                updateNewsSlider();
+                resetNewsAutoplay();
+            });
+        }
+
+        // Drag/Swipe Functionality
+        const trackContainer = document.getElementById('news-track');
+        if (trackContainer) {
+            const startDrag = (clientX) => {
+                isNewsDragging = true;
+                newsStartX = clientX;
+                newsDragOffset = 0;
+                trackContainer.style.cursor = 'grabbing';
+            };
+
+            const moveDrag = (clientX) => {
+                if (!isNewsDragging) return;
+                const diffX = clientX - newsStartX;
+                newsDragOffset = -diffX;
+                updateNewsSlider();
+
+                if (Math.abs(diffX) > 8) {
+                    isNewsClickPrevented = true;
+                }
+            };
+
+            const endDrag = () => {
+                if (!isNewsDragging) return;
+                isNewsDragging = false;
+                trackContainer.style.cursor = 'grab';
+
+                const cardWidth = trackContainer.firstElementChild ? trackContainer.firstElementChild.offsetWidth : 100;
+                const step = Math.round(newsDragOffset / (cardWidth + 24));
+                
+                newsCarouselIndex += step;
+                newsDragOffset = 0;
+                updateNewsSlider();
+                resetNewsAutoplay();
+
+                if (isNewsClickPrevented) {
+                    setTimeout(() => { isNewsClickPrevented = false; }, 50);
+                }
+            };
+
+            trackContainer.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                startDrag(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                moveDrag(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                endDrag();
+            });
+
+            // Touch support for mobiles
+            trackContainer.addEventListener('touchstart', (e) => {
+                startDrag(e.touches[0].clientX);
+            }, { passive: true });
+
+            trackContainer.addEventListener('touchmove', (e) => {
+                moveDrag(e.touches[0].clientX);
+            }, { passive: true });
+
+            trackContainer.addEventListener('touchend', () => {
+                endDrag();
+            }, { passive: true });
+        }
+
+        // Autoplay Loop Functionality
+        let newsAutoplayTimer = setInterval(() => {
+            newsCarouselIndex++;
+            updateNewsSlider();
+        }, 6000);
+
+        function resetNewsAutoplay() {
+            clearInterval(newsAutoplayTimer);
+            newsAutoplayTimer = setInterval(() => {
+                newsCarouselIndex++;
+                updateNewsSlider();
+            }, 6000);
+        }
+
+        // Modal triggers
+        function openNewsModal(key) {
+            if (isNewsClickPrevented) return;
+            const item = newsDataset[key];
+            if (!item) return;
+
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-badge').innerText = item.badge;
+            document.getElementById('modal-date').innerText = item.date;
+            document.getElementById('modal-title').innerText = item.title;
+
+            const textContainer = document.getElementById('modal-text');
+            textContainer.innerHTML = '';
+            item.text.forEach(p => {
+                textContainer.innerHTML += `<p class="mb-4">${p}</p>`;
+            });
+
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function closeNewsModal() {
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close on clicking outside modal content
+        document.getElementById('news-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeNewsModal();
+            }
+        });
+
+        window.addEventListener('resize', debounce(() => {
+            buildNewsDots();
+            updateNewsSlider();
+        }, 150));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderNewsCards();
         });
     </script>
 
