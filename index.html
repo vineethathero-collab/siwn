@@ -283,6 +283,98 @@
             animation: badgePulse 5s ease-in-out infinite;
         }
 
+        /* --- Scroll Down Indicator --- */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scroll-down-indicator.hidden-scroll {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+            pointer-events: none;
+        }
+
+        .scroll-mouse {
+            width: 26px;
+            height: 42px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 14px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 3px;
+            position: absolute;
+            top: 7px;
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.4; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-chevrons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .scroll-chevrons span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-right: 2px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            transform: rotate(45deg);
+            animation: scrollChevron 2s ease-in-out infinite;
+        }
+
+        .scroll-chevrons span:nth-child(2) {
+            animation-delay: 0.15s;
+            margin-top: -5px;
+        }
+
+        .scroll-chevrons span:nth-child(3) {
+            animation-delay: 0.3s;
+            margin-top: -5px;
+        }
+
+        @keyframes scrollChevron {
+            0% { opacity: 0; transform: rotate(45deg) translateY(-4px); }
+            30% { opacity: 1; }
+            60% { opacity: 1; }
+            100% { opacity: 0; transform: rotate(45deg) translateY(6px); }
+        }
+
+        .scroll-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 2px;
+        }
+
         /* --- ප්‍රධාන HERO SLIDER කලාපය --- */
         .hero-container {
             position: relative;
@@ -772,6 +864,9 @@
             justify-content: center;
             touch-action: pan-y;
             outline: none;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* Enhanced bezier transition curve for multi-image smooth slide */
@@ -1332,6 +1427,17 @@
             <button class="prev-btn" aria-label="Previous slide"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="next-btn" aria-label="Next slide"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-down-indicator" id="scroll-down-hint" onclick="scrollToSection('daham-pasala')">
+            <span class="scroll-label">Scroll Down</span>
+            <div class="scroll-mouse"></div>
+            <div class="scroll-chevrons">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </section>
 
     <!-- SECTION 1: SIVUMAGA DAHAM PASALA REGISTRATION SECTION -->
@@ -1529,7 +1635,6 @@
     </section>
 
     <!-- SECTION 4: SIVUMAGA TIMETABLE SECTION -->
-    <!-- SECTION 4: SIVUMAGA TIMETABLE SECTION (UPDATED COLUMNS) -->
     <section id="timetable" class="py-24 bg-slate-50 border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Header (Theme Matched) -->
@@ -1539,17 +1644,16 @@
                     <span class="text-amber-500"><i class="fa-regular fa-calendar-days"></i></span> දහම් පන්ති කාලසටහන
                 </h2>
                 <div class="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-4"></div>
-                <p class="text-slate-600 font-medium">සිංහල සහ ඉංග්‍රීසි මාධ්‍ය දහම් පන්තිවල සම්පූර්ණ වේලාවන් සහ සම්බන්ධ
-                    වීමේ සබැඳි</p>
+                <p class="text-slate-600 font-medium">සිංහල, ඉංග්‍රීසි සහ ජපන් මාධ්‍ය දහම් පන්තිවල සම්පූර්ණ වේලාවන් සහ සම්බන්ධ වීමේ සබැඳි</p>
             </div>
 
             <!-- DESKTOP TIMETABLE VIEW (Hidden on Mobile) -->
             <div class="hidden md:block reveal-element reveal-fade-up delay-100">
                 <!-- Timetable Interactive Controls -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-8 max-w-5xl mx-auto">
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-8 max-w-6xl mx-auto">
                     <!-- Medium Selector Tabs (with updated Country Flags) -->
                     <div
-                        class="flex bg-slate-200 p-1.5 rounded-2xl border border-slate-300 shadow-inner w-full sm:w-auto gap-2">
+                        class="flex bg-slate-200 p-1.5 rounded-2xl border border-slate-300 shadow-inner w-full sm:w-auto gap-2 flex-wrap sm:flex-nowrap">
                         <button id="tab-sinhala" onclick="switchMedium('Sinhala')"
                             class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2">
                             <span>සිංහල මාධ්‍යය</span>
@@ -1568,7 +1672,13 @@
                                 <img src="https://flagcdn.com/w20/qa.png" class="w-4 h-3 rounded-sm object-cover" alt="QA">
                                 <img src="https://flagcdn.com/w20/ca.png" class="w-4 h-3 rounded-sm object-cover" alt="CA">
                                 <img src="https://flagcdn.com/w20/ie.png" class="w-4 h-3 rounded-sm object-cover" alt="IE">
-                                <span class="text-[10px]" title="International">🌐</span>
+                            </div>
+                        </button>
+                        <button id="tab-japan" onclick="switchMedium('Japan')"
+                            class="flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2">
+                            <span>Japan Medium</span>
+                            <div class="flex items-center gap-1 bg-slate-300/50 px-1.5 py-0.5 rounded-md">
+                                <img src="https://flagcdn.com/w20/jp.png" class="w-4 h-3 rounded-sm object-cover" alt="JP">
                             </div>
                         </button>
                     </div>
@@ -1576,7 +1686,7 @@
                     <!-- Instant Search Input -->
                     <div class="relative w-full sm:w-72">
                         <input type="text" id="timetable-search" onkeyup="filterTimetable()"
-                            placeholder="රට, පියවර හෝ අංශය සොයන්න..."
+                            placeholder="රට හෝ වයස් සීමාව සොයන්න..."
                             class="w-full bg-white text-slate-800 pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all text-sm shadow-sm">
                         <span class="absolute left-3.5 top-[50%] -translate-y-1/2 text-slate-400 text-sm"><i
                                 class="fas fa-search"></i></span>
@@ -1594,6 +1704,7 @@
                                     <th>අංශය</th>
                                     <th>වයස් සීමාව</th>
                                     <th>පැවැත්වෙන වේලාව (SL වේලාව)</th>
+                                    <th>දේශීය වේලාව (රට අනුව)</th>
                                     <th>සම්බන්ධ වන්න</th>
                                 </tr>
                             </thead>
@@ -1625,7 +1736,7 @@
 
                     <h3 class="text-xl font-bold text-white mb-3">දහම් පන්ති කාලසටහන</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        සිංහල සහ ඉංග්‍රීසි මාධ්‍ය පන්තිවල සම්පූර්ණ කාලසටහන සහ සම්බන්ධ වීමේ සබැඳි සියල්ල ජංගම දුරකථනයට
+                        සිංහල, ඉංග්‍රීසි සහ ජපන් මාධ්‍ය පන්තිවල සම්පූර්ණ කාලසටහන සහ සම්බන්ධ වීමේ සබැඳි සියල්ල ජංගම දුරකථනයට
                         ගැළපෙන අයුරින් පහතින් නරඹන්න.
                     </p>
 
@@ -1661,7 +1772,7 @@
                     <div class="bg-slate-950 p-3 sm:p-4 rounded-3xl shadow-2xl border border-slate-800/80 relative">
 
 
-                        <!-- Light YouTube Facade (Saves 1.5MB on Initial Load!) -->
+                        <!-- Light YouTube Facade -->
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-inner border border-white/5"
                             id="yt-player-container">
                             <div id="youtube-facade-placeholder" class="absolute inset-0 cursor-pointer group"
@@ -1755,21 +1866,20 @@
             <div class="px-6 py-4 space-y-4 flex-grow">
                 <div class="relative w-full">
                     <input type="text" id="modal-timetable-search" onkeyup="filterTimetable()"
-                        placeholder="රට, පියවර හෝ අංශය සොයන්න..."
+                        placeholder="රට හෝ වයස් සීමාව සොයන්න..."
                         class="w-full bg-white text-slate-800 pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all text-sm shadow-sm">
                     <span class="absolute left-3.5 top-[50%] -translate-y-1/2 text-slate-400 text-sm"><i
                             class="fas fa-search"></i></span>
                 </div>
 
                 <!-- Toggle tab controls (with updated Mobile Flags) -->
-                <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300 shadow-inner w-full gap-2">
+                <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300 shadow-inner w-full gap-2 flex-wrap">
                     <button id="modal-tab-sinhala" onclick="switchMedium('Sinhala')"
                         class="flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1">
                         <span>සිංහල</span>
                         <div class="flex items-center gap-0.5 bg-white/20 px-1 py-0.5 rounded">
                             <img src="https://flagcdn.com/w20/lk.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="LK">
                             <img src="https://flagcdn.com/w20/gb.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="UK">
-                            <img src="https://flagcdn.com/w20/au.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="AU">
                         </div>
                     </button>
                     <button id="modal-tab-english" onclick="switchMedium('English')"
@@ -1778,7 +1888,13 @@
                         <div class="flex items-center gap-0.5 bg-slate-300/50 px-1 py-0.5 rounded">
                             <img src="https://flagcdn.com/w20/lk.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="LK">
                             <img src="https://flagcdn.com/w20/qa.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="QA">
-                            <img src="https://flagcdn.com/w20/ca.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="CA">
+                        </div>
+                    </button>
+                    <button id="modal-tab-japan" onclick="switchMedium('Japan')"
+                        class="flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1">
+                        <span>Japan</span>
+                        <div class="flex items-center gap-0.5 bg-slate-300/50 px-1 py-0.5 rounded">
+                            <img src="https://flagcdn.com/w20/jp.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="JP">
                         </div>
                     </button>
                 </div>
@@ -2128,6 +2244,20 @@
             }
         }
 
+        // Hide scroll indicator on scroll
+        (function() {
+            const scrollHint = document.getElementById('scroll-down-hint');
+            if (scrollHint) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 100) {
+                        scrollHint.classList.add('hidden-scroll');
+                    } else {
+                        scrollHint.classList.remove('hidden-scroll');
+                    }
+                }, { passive: true });
+            }
+        })();
+
         // Hero Slider Navigation (Click transitions)
         const next = document.querySelector('.next-btn');
         const prev = document.querySelector('.prev-btn');
@@ -2195,9 +2325,8 @@
     </script>
 
     <!-- TIMETABLE SYSTEM DATA & ACTIVE TIME VALIDATION -->
-    <!-- _STREAMING_CHUNK:Updating timetable data with local times... _ -->
     <script>
-        // Updated data with local time zones corresponding to each country
+        // Updated data with local time zones corresponding to each country (Including Japan Medium)
         const timetableData = [
             // Sinhala Medium (සිංහල මාධ්‍යය)
             { med: "Sinhala", country: "ශ්‍රී ලංකාව", type: "ආරාමීය", gender: "පුරුෂ", sec: "සිව්මග දරුවෝ - ආරාමය", age: "අවු: 7 - 11", time: "සෙන. 2:00 - 7:00 pm", localTime: "සෙන. 2:00 - 7:00 pm", link: "https://zoom.us/mock-link-sivumaga-1", day: 6, startHour: 14, startMin: 0, endHour: 19, endMin: 0 },
@@ -2235,7 +2364,11 @@
             { med: "English", country: "කටාර් රාජ්‍යය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 7 - 16", time: "සිකු. 2:00 - 3:30 pm", localTime: "Fri. 11:30 am - 1:00 pm (AST)", link: "https://zoom.us/mock-link-sivumaga-31", day: 5, startHour: 14, startMin: 0, endHour: 15, endMin: 30 },
             { med: "English", country: "කැනඩාව", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 7 - 12", time: "ඉරිදා 8:00 - 9:30 pm", localTime: "Sun. 10:30 am - 12:00 pm (EDT)", link: "https://zoom.us/mock-link-sivumaga-32", day: 0, startHour: 20, startMin: 0, endHour: 21, endMin: 30 },
             { med: "English", country: "කැනඩාව 1", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 13 - 16", time: "ඉරිදා 8:30 - 10:00 pm", localTime: "Sun. 11:00 am - 12:30 pm (EDT)", link: "https://zoom.us/mock-link-sivumaga-33", day: 0, startHour: 20, startMin: 30, endHour: 22, endMin: 0 },
-            { med: "English", country: "අයර්ලන්තය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 06 - 16", time: "සෙන. 7:30 - 9:00 pm", localTime: "Sat. 3:00 - 4:30 pm (IST)", link: "https://zoom.us/mock-link-sivumaga-34", day: 6, startHour: 19, startMin: 30, endHour: 21, endMin: 0 }
+            { med: "English", country: "අයර්ලන්තය", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "Siwmaga International", age: "අවු: 06 - 16", time: "සෙන. 7:30 - 9:00 pm", localTime: "Sat. 3:00 - 4:30 pm (IST)", link: "https://zoom.us/mock-link-sivumaga-34", day: 6, startHour: 19, startMin: 30, endHour: 21, endMin: 0 },
+
+            // Japan Medium (ජපන් මාධ්‍යය) - Sri Lanka Sunday 12:00 - 1:00 pm is Japan Sunday 3:30 - 4:30 pm JST
+            { med: "Japan", country: "Japan", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 6 - 10", time: "ඉරිදා 12:00 - 1:00 pm", localTime: "Sun. 3:30 - 4:30 pm (JST)", link: "https://zoom.us/mock-link-sivumaga-35", day: 0, startHour: 12, startMin: 0, endHour: 13, endMin: 0 },
+            { med: "Japan", country: "Japan", type: "Online", gender: "ස්ත්‍රී/පුරුෂ", sec: "සිව්මග පිටරට", age: "අවු: 11 - 16", time: "ඉරිදා 12:00 - 1:00 pm", localTime: "Sun. 3:30 - 4:30 pm (JST)", link: "https://zoom.us/mock-link-sivumaga-36", day: 0, startHour: 12, startMin: 0, endHour: 13, endMin: 0 }
         ];
 
         let activeMedium = "Sinhala";
@@ -2310,31 +2443,36 @@
 
             const tabSinhala = document.getElementById("tab-sinhala");
             const tabEnglish = document.getElementById("tab-english");
+            const tabJapan = document.getElementById("tab-japan");
+            
             const mTabSinhala = document.getElementById("modal-tab-sinhala");
             const mTabEnglish = document.getElementById("modal-tab-english");
+            const mTabJapan = document.getElementById("modal-tab-japan");
 
-            if (medium === "Sinhala") {
-                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2";
-                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2";
+            const activeStyle = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2";
+            const inactiveStyle = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2";
+            
+            const mActiveStyle = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1";
+            const mInactiveStyle = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1";
 
-                if (mTabSinhala) mTabSinhala.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1";
-                if (mTabEnglish) mTabEnglish.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1";
-            } else {
-                if (tabEnglish) tabEnglish.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-2";
-                if (tabSinhala) tabSinhala.className = "flex-1 sm:flex-none text-sm font-bold px-6 py-3.5 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2";
+            if (tabSinhala) tabSinhala.className = (medium === "Sinhala") ? activeStyle : inactiveStyle;
+            if (tabEnglish) tabEnglish.className = (medium === "English") ? activeStyle : inactiveStyle;
+            if (tabJapan) tabJapan.className = (medium === "Japan") ? activeStyle : inactiveStyle;
 
-                if (mTabEnglish) mTabEnglish.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 bg-amber-500 text-white shadow-md flex items-center justify-center gap-1";
-                if (mTabSinhala) mTabSinhala.className = "flex-1 text-xs font-bold py-3 rounded-lg transition-all duration-300 text-slate-700 hover:text-slate-900 flex items-center justify-center gap-1";
-            }
+            if (mTabSinhala) mTabSinhala.className = (medium === "Sinhala") ? mActiveStyle : mInactiveStyle;
+            if (mTabEnglish) mTabEnglish.className = (medium === "English") ? mActiveStyle : mInactiveStyle;
+            if (mTabJapan) mTabJapan.className = (medium === "Japan") ? mActiveStyle : mInactiveStyle;
 
             filterTimetable();
         }
 
-        /* --- STREAMING_CHUNK:Filtering timetable columns and removing the local time column... --- */
         function filterTimetable() {
             const desktopQuery = document.getElementById("timetable-search") ? document.getElementById("timetable-search").value.toLowerCase() : "";
             const modalQuery = document.getElementById("modal-timetable-search") ? document.getElementById("modal-timetable-search").value.toLowerCase() : "";
-            const query = (modalQuery || desktopQuery).trim();
+            
+            // Check if mobile modal is active to determine which input query to read
+            const isModalVisible = !document.getElementById("timetable-mobile-modal").classList.contains("hidden");
+            const query = (isModalVisible ? modalQuery : desktopQuery).trim();
 
             const cardsContainer = document.getElementById("timetable-cards-container");
             const desktopTableBody = document.getElementById("timetable-rows");
@@ -2343,12 +2481,21 @@
             const warning = document.getElementById("no-timetable-results");
             const mWarning = document.getElementById("modal-no-timetable-results");
 
+            // Filter logic: Search globally across all 3 mediums if query is not empty
             const filteredData = timetableData.map((item, originalIndex) => ({ ...item, originalIndex }))
                 .filter(item => {
-                    const matchesMedium = item.med === activeMedium;
                     const matchesQuery = item.country.toLowerCase().includes(query) ||
-                        item.sec.toLowerCase().includes(query);
-                    return matchesMedium && matchesQuery;
+                        item.age.toLowerCase().includes(query) ||
+                        item.sec.toLowerCase().includes(query) ||
+                        item.med.toLowerCase().includes(query);
+                    
+                    if (query === "") {
+                        // Empty query: Show only the selected tab's active medium
+                        return item.med === activeMedium;
+                    } else {
+                        // Query present: Search across all three tabs (Sinhala, English, Japan)
+                        return matchesQuery;
+                    }
                 });
 
             if (filteredData.length === 0) {
@@ -2359,7 +2506,7 @@
                 if (desktopTableBody) desktopTableBody.innerHTML = '';
                 return;
             } else {
-                if (warning) warning.classList.add("hidden");
+                if (warning) warning.add ? warning.classList.add("hidden") : warning.classList.add("hidden");
                 if (desktopTable) desktopTable.classList.remove("hidden");
                 if (mWarning) mWarning.classList.add("hidden");
             }
@@ -2379,10 +2526,15 @@
                         ? `<span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span></span> සම්බන්ධ වන්න`
                         : `<i class="fa-solid fa-lock text-[10px] text-slate-400"></i> අගුළු දමා ඇත`;
 
+                    let medLabel = '';
+                    if (item.med === 'Sinhala') medLabel = 'සිංහල මාධ්‍යය';
+                    else if (item.med === 'English') medLabel = 'English Medium';
+                    else if (item.med === 'Japan') medLabel = 'Japan Medium';
+
                     const card = `
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 transition-all duration-300">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">${item.med === 'Sinhala' ? 'සිංහල මාධ්‍යය' : 'English Medium'}</span>
+                                <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">${medLabel}</span>
                                 <span class="status-badge ${badgeClass}">${item.type}</span>
                             </div>
                             <h4 class="text-base font-bold text-slate-800 mb-2">${item.country}</h4>
@@ -2396,6 +2548,10 @@
                                     <span class="text-xs font-bold text-slate-500">ශ්‍රී ලංකා වේලාව:</span>
                                     <span class="text-xs font-bold text-amber-600">${item.time}</span>
                                 </div>
+                                <div class="flex items-center justify-between border-t border-slate-200/60 pt-1.5">
+                                    <span class="text-xs font-bold text-slate-500">දේශීය වේලාව:</span>
+                                    <span class="text-xs font-bold text-blue-600">${item.localTime}</span>
+                                </div>
                             </div>
                             <button onclick="handleJoinClass(${item.originalIndex})" class="w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-xs transition-all shadow-sm active:scale-95 ${btnClass}">
                                 ${btnLabel}
@@ -2406,7 +2562,7 @@
                 });
             }
 
-            // Desktop table rows (removed "මාධ්‍යය", "අනු අංශය" & "දේශීය වේලාව", added "SL වේලාව")
+            // Desktop table rows
             if (desktopTableBody) {
                 desktopTableBody.innerHTML = '';
                 filteredData.forEach((item, index) => {
@@ -2420,14 +2576,30 @@
                         ? `<span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span></span> සම්බන්ධ වන්න`
                         : `<i class="fa-solid fa-lock text-[10px] text-slate-400"></i> අගුළු දමා ඇත`;
 
+                    // Generate distinct badge markup for each medium shown dynamically during search
+                    let rowMedLabel = '';
+                    if (item.med === 'Sinhala') {
+                        rowMedLabel = '<span class="ml-2 px-2.5 py-1 text-[10px] font-extrabold bg-amber-500/10 text-amber-600 rounded-md border border-amber-500/25">සිංහල</span>';
+                    } else if (item.med === 'English') {
+                        rowMedLabel = '<span class="ml-2 px-2.5 py-1 text-[10px] font-extrabold bg-blue-500/10 text-blue-500 rounded-md border border-blue-500/25">English</span>';
+                    } else if (item.med === 'Japan') {
+                        rowMedLabel = '<span class="ml-2 px-2.5 py-1 text-[10px] font-extrabold bg-red-500/10 text-red-500 rounded-md border border-red-500/25">Japan</span>';
+                    }
+
                     const rowHTML = `
-                        <tr class="t-row t-${activeMedium.toLowerCase()}">
-                            <td class="font-semibold text-slate-800">${item.country}</td>
+                        <tr class="t-row t-${item.med.toLowerCase()}">
+                            <td class="font-semibold text-slate-800">
+                                <div class="flex items-center justify-center gap-1">
+                                    <span>${item.country}</span>
+                                    ${query !== "" ? rowMedLabel : ""}
+                                </div>
+                            </td>
                             <td><span class="status-badge ${badgeClass}">${item.type}</span></td>
                             <td>${item.gender}</td>
                             <td>${item.sec}</td>
                             <td class="font-medium text-slate-700">${item.age}</td>
                             <td class="font-bold text-amber-600 text-xs">${item.time}</td>
+                            <td class="font-bold text-blue-600 text-xs">${item.localTime}</td>
                             <td>
                                 <button onclick="handleJoinClass(${item.originalIndex})" class="inline-flex items-center justify-center gap-2 font-extrabold px-5 py-3 rounded-xl text-xs transition-all shadow-sm transform hover:-translate-y-0.5 active:scale-95 ${btnClass}">
                                     ${btnLabel}
@@ -2494,9 +2666,14 @@
 
             const totalSlides = slides.length;
             let virtualIndex = 2000000 + 2;
+            let dragOffset = 0;
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
 
             function getRealIndex() {
-                return ((virtualIndex % totalSlides) + totalSlides) % totalSlides;
+                const currentVirtual = virtualIndex + dragOffset;
+                return ((currentVirtual % totalSlides) + totalSlides) % totalSlides;
             }
 
             function buildDots() {
@@ -2531,7 +2708,7 @@
 
                     const absOffset = Math.abs(offset);
 
-                    if (absOffset > 2) {
+                    if (absOffset > 2.2) {
                         slide.style.opacity = '0';
                         slide.style.visibility = 'hidden';
                         slide.style.transform = `translate3d(${offset > 0 ? 150 : -150}%, 0, 0) scale(0.4) rotateY(${offset > 0 ? -45 : 45}deg)`;
@@ -2540,9 +2717,18 @@
                     }
 
                     slide.style.visibility = 'visible';
-                    slide.style.opacity = absOffset === 0 ? '1' : (absOffset === 1 ? '0.78' : '0.35');
-                    slide.style.filter = absOffset === 0 ? 'blur(0px)' : 'blur(1.5px)';
-                    slide.style.zIndex = 10 - absOffset;
+                    
+                    let opacity = 0;
+                    if (absOffset <= 1) {
+                        opacity = 1 - absOffset * (1 - 0.78);
+                    } else if (absOffset <= 2) {
+                        opacity = 0.78 - (absOffset - 1) * (0.78 - 0.35);
+                    } else {
+                        opacity = 0.35 - (absOffset - 2) * 0.35;
+                    }
+                    slide.style.opacity = Math.max(0, opacity).toString();
+                    slide.style.filter = `blur(${absOffset * 1.5}px)`;
+                    slide.style.zIndex = Math.round(10 - absOffset).toString();
 
                     let translateX = offset * 260;
                     let scale = 1 - (absOffset * 0.16);
@@ -2556,31 +2742,36 @@
                         translateX = offset * 190;
                     }
 
-                    if (!slide.dataset.prevOffset) {
-                        slide.dataset.prevOffset = offset;
-                    }
-                    const prevOffset = parseFloat(slide.dataset.prevOffset);
-
-                    if (Math.abs(offset - prevOffset) > 2) {
+                    if (isDragging) {
                         slide.style.transition = 'none';
-                        void slide.offsetHeight;
                     } else {
-                        slide.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease, filter 0.85s ease';
+                        if (!slide.dataset.prevOffset) {
+                            slide.dataset.prevOffset = offset.toString();
+                        }
+                        const prevOffset = parseFloat(slide.dataset.prevOffset);
+
+                        if (Math.abs(offset - prevOffset) > 2) {
+                            slide.style.transition = 'none';
+                            void slide.offsetHeight;
+                        } else {
+                            slide.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease, filter 0.85s ease';
+                        }
                     }
-                    slide.dataset.prevOffset = offset;
+                    slide.dataset.prevOffset = offset.toString();
 
                     slide.style.transform = `translate3d(${translateX}px, 0, ${-absOffset * 40}px) scale(${scale}) rotateY(${rotateY}deg)`;
 
-                    if (absOffset === 0) {
+                    if (absOffset < 0.5) {
                         slide.classList.add('active-3d');
                     } else {
                         slide.classList.remove('active-3d');
                     }
                 });
 
+                const realIntIndex = Math.round(realIndex) % totalSlides;
                 const dots = document.querySelectorAll('.dot-3d');
                 dots.forEach((dot, idx) => {
-                    if (idx === realIndex) {
+                    if (idx === (realIntIndex + totalSlides) % totalSlides) {
                         dot.classList.add('active-dot');
                     } else {
                         dot.classList.remove('active-dot');
@@ -2627,26 +2818,112 @@
                 });
             });
 
-            let touchStartX = 0;
-            let touchEndX = 0;
             let lastWheelTime = 0;
 
             function moveCarousel(direction) {
                 goToSlide(direction);
             }
 
+            // Mouse Drag Scrolling & Interactive Swiping Feature
+            const dragThreshold = 8;
+            let clickPrevented = false;
+
+            function getStepSize() {
+                if (window.innerWidth < 768) return 115;
+                if (window.innerWidth < 1024) return 190;
+                return 260;
+            }
+
+            viewport.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return; // Only left click
+                isDragging = true;
+                startX = e.clientX;
+                currentX = e.clientX;
+                dragOffset = 0;
+                viewport.style.cursor = 'grabbing';
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX;
+                const deltaX = currentX - startX;
+                dragOffset = -deltaX / getStepSize();
+                updateCarousel();
+
+                if (Math.abs(deltaX) > dragThreshold) {
+                    clickPrevented = true;
+                }
+            });
+
+            window.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.style.cursor = 'grab';
+
+                const slideChange = Math.round(dragOffset);
+                virtualIndex += slideChange;
+                dragOffset = 0;
+                updateCarousel();
+                resetAutoplayTimer();
+
+                if (clickPrevented) {
+                    setTimeout(() => {
+                        clickPrevented = false;
+                    }, 50);
+                }
+            });
+
+            // Prevent browser image dragging behavior
+            viewport.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', (e) => e.preventDefault());
+            });
+
+            // Interactive Touch Support
             viewport.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                currentX = e.touches[0].clientX;
+                dragOffset = 0;
+            }, { passive: true });
+
+            viewport.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                currentX = e.touches[0].clientX;
+                const deltaX = currentX - startX;
+                dragOffset = -deltaX / getStepSize();
+                updateCarousel();
+
+                if (Math.abs(deltaX) > dragThreshold) {
+                    clickPrevented = true;
+                }
             }, { passive: true });
 
             viewport.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
+                if (!isDragging) return;
+                isDragging = false;
+
+                const slideChange = Math.round(dragOffset);
+                virtualIndex += slideChange;
+                dragOffset = 0;
+                updateCarousel();
+                resetAutoplayTimer();
+
+                if (clickPrevented) {
+                    setTimeout(() => {
+                        clickPrevented = false;
+                    }, 50);
+                }
             }, { passive: true });
 
-            viewport.addEventListener('click', () => {
-                viewport.focus();
-            });
+            viewport.addEventListener('click', (e) => {
+                if (clickPrevented) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    clickPrevented = false;
+                } else {
+                    viewport.focus();
+                }
+            }, true);
 
             viewport.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -2671,14 +2948,6 @@
                 moveCarousel(e.deltaY > 0 ? 1 : -1);
                 resetAutoplayTimer();
             }, { passive: false });
-
-            function handleSwipe() {
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 40) {
-                    moveCarousel(diff > 0 ? 1 : -1);
-                    resetAutoplayTimer();
-                }
-            }
 
             window.addEventListener('resize', debounce(updateCarousel, 100));
 
@@ -2721,8 +2990,8 @@
             ],
             shorts: [
                 { id: "Mqeo5XQ85tU", title: "තත්පර 60න් සිත එකඟ කරගන්නා විශ්මිත ක්‍රමය", desc: "🔥 1 MILLION+ VIEWS! ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ කෙටි දේශනාව", thumb: "https://img.youtube.com/vi/Mqeo5XQ85tU/0.jpg", type: "short", special: true },
-                { id: "fq77AgjStUg", title: "යහපත් ජීවිතයකට පුංචි දහම් පණිවිඩයක්", desc: "තරුණ සිතුවිලි නිවැරදි දිශාවට මෙහෙයවන්නට", thumb: "https://img.youtube.com/vi/fq77AgjStUg/0.jpg", type: "short" },
-                { id: "Rm7eVI_ZjIg", title: "අපහසු අවස්ථාවන්හිදී නොසැලී සිටින්නේ كෙසේද?", desc: "ලොව්තුරු දහමෙන් ජීවිතයට ශක්තියක්", thumb: "https://img.youtube.com/vi/Rm7eVI_ZjIg/0.jpg", type: "short" },
+                { id: "fq77AgjStUg", title: "යහපත් ජීවිතයකට puංචි දහම් පණිවිඩයක්", desc: "තරුණ සිතුවිලි නිවැරදි දිශාවට මෙහෙයවන්නට", thumb: "https://img.youtube.com/vi/fq77AgjStUg/0.jpg", type: "short" },
+                { id: "Rm7eVI_ZjIg", title: "අපහසු අවස්ථාවන්හිදී නොසැලී සිටින්නේ කෙසේද?", desc: "ලොව්තුරු දහමෙන් ජීවිතයට ශක්තියක්", thumb: "https://img.youtube.com/vi/Rm7eVI_ZjIg/0.jpg", type: "short" },
                 { id: "gTIUlD3ZMtM", title: "පුංචි දරුවන්ට ආදර්ශවත් බෞද්ධ කතාවක්", desc: "ගුණධර්ම පිරි සදාචාරවත් දරු පරපුරක් උදෙසා", thumb: "https://img.youtube.com/vi/gTIUlD3ZMtM/0.jpg", type: "short" }
             ]
         };
