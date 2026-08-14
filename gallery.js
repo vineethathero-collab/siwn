@@ -296,7 +296,7 @@
             const container = document.getElementById('photoGallery');
 
             if (!images || images.length === 0) {
-                container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-10">මෙම කාණ්ඩය යටතේ පින්තූර කිසිවක් හමු නොවුණි.</p>';
+                container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-10">No Images</p>';
                 document.getElementById('loadMoreContainer').classList.add('hidden');
                 return;
             }
