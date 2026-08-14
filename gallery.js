@@ -199,7 +199,7 @@
                 videoContainer.innerHTML = `
                     <div class="col-span-full text-center py-16">
                         <div class="inline-block w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                        <p class="mt-3 text-slate-600 font-medium text-sm">සදහම් වීඩියෝ දසුන් ලෝඩ් වෙමින් පවතී, පොඩ්ඩක් ඉන්න...</p>
+                        <p class="mt-3 text-slate-600 font-medium text-sm">loding...</p>
                     </div>`;
             }
 
