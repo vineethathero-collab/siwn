@@ -277,6 +277,13 @@ function getSLDate() {
     return new Date(utc + (3600000 * 5.5)); // UTC + 5:30 for Sri Lanka Time
 }
 
+
+// All Buttone Active
+// function isClassActive(item) {
+//     return true; 
+//     const slDate = getSLDate();
+
+// }
 function isClassActive(item) {
     const slDate = getSLDate();
     const currentDay = slDate.getDay();
