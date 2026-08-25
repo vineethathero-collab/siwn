@@ -299,6 +299,15 @@ function isClassActive(item) {
     return currentMinutesSinceMidnight >= startMinutes && currentMinutesSinceMidnight <= endMinutes;
 }
 
+// special class ekak buttone visibleCountfunction isClassActive(item) {
+//     if (item.country === "Japan" && item.sec.includes("Junior")) {
+//         return true;
+//     }
+
+//     const slDate = getSLDate();
+
+// }
+
 function formatGender(gender, isEN) {
     if (!isEN) return gender;
     if (gender === 'පුරුෂ') return 'Male';
