@@ -984,46 +984,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const youthYoutubeData = {
     latest: [
+
         {
-            id: "W3vYHnD1W8w",
-            title: "Latest Dhamma Video",
-            desc: "A newly added Dhamma video from Siwmaga.",
-            thumb: "https://img.youtube.com/vi/W3vYHnD1W8w/0.jpg",
-            type: "video"
-        },
-        {
-            id: "B4NGnL-SZvY",
-            title: "Latest Dhamma Talk",
-            desc: "A newly added Dhamma talk from Siwmaga.",
-            thumb: "https://img.youtube.com/vi/B4NGnL-SZvY/0.jpg",
-            type: "video"
-        },
-        {
-            id: "rfpsJQTyUq4",
-            title: "Latest Dhamma Message",
-            desc: "A newly added Dhamma message from Siwmaga.",
-            thumb: "https://img.youtube.com/vi/rfpsJQTyUq4/0.jpg",
-            type: "video"
-        },
-        {
-            id: "xt0GDSVk4J4",
-            title: "ඔබ සතුටින්ද ඉන්නේ",
+            id: "9VN7v9Z-v0k",
+            title: "ඇත්තටම නිවන් දකින්න ඕනද?",
             desc: "නිවන මූලික කරගත් නිවැරදි අවබෝධයෙන් ලොව දකින ගුණ නැණ බෙලෙන් සපිරි උතුම් දුදරු කැළක් ලොවට දායාද කිරීම උදෙසා...",
-            thumb: "https://img.youtube.com/vi/xt0GDSVk4J4/0.jpg",
+            thumb: "https://img.youtube.com/vi/9VN7v9Z-v0k/0.jpg",
             type: "video"
+
         },
         {
-            id: "sWimbFKrw94",
-            title: "අම්මගෙ ආදරේ නොමිලේද ලැබුනේ",
+            id: "Hbx5Ep-5Uj0",
+            title: "රුපියල් 5000, 10000 වුන හැටි",
             desc: "නිවන මූලික කරගත් නිවැරදි අවබෝධයෙන් ලොව දකින ගුණ නැණ බෙලෙන් සපිරි උතුම් දුදරු කැළක් ලොවට දායාද කිරීම උදෙසා... ",
-            thumb: "https://img.youtube.com/vi/sWimbFKrw94/0.jpg",
+            thumb: "https://img.youtube.com/vi/Hbx5Ep-5Uj0/0.jpg",
             type: "video"
         },
         {
-            id: "xvbuizKzpuA",
+            id: "1cH8uEQzPhg",
             title: "සතුටින් ඉන්න නම්...",
             desc: "නිවන මූලික කරගත් නිවැරදි අවබෝධයෙන් ලොව දකින ගුණ නැණ බෙලෙන් සපිරි උතුම් දුදරු කැළක් ලොවට දායාද කිරීම උදෙසා... ",
-            thumb: "https://img.youtube.com/vi/xvbuizKzpuA/0.jpg",
+            thumb: "https://img.youtube.com/vi/1cH8uEQzPhg/0.jpg",
             type: "video"
         }
     ],
@@ -1044,24 +1025,24 @@ const youthYoutubeData = {
 const youthYoutubeDataEN = {
     latest: [
         {
-            id: "xt0GDSVk4J4",
-            title: "Are You Happy?",
+            id: "rfpsJQTyUq4",
+            title: "Who Is the Hijacker of Your Mind? ",
             desc: "A Dhamma message to help children see the world with wisdom, virtue, and a correct understanding rooted in Nibbana.",
-            thumb: "https://img.youtube.com/vi/xt0GDSVk4J4/0.jpg",
+            thumb: "https://img.youtube.com/vi/rfpsJQTyUq4/0.jpg",
             type: "video"
         },
         {
-            id: "sWimbFKrw94",
+            id: "B4NGnL-SZvY",
             title: "Was Mother's Love Really Free?",
             desc: "A thoughtful Dhamma message to help children see the world with wisdom, virtue, and a correct understanding.",
-            thumb: "https://img.youtube.com/vi/sWimbFKrw94/0.jpg",
+            thumb: "https://img.youtube.com/vi/B4NGnL-SZvY/0.jpg",
             type: "video"
         },
         {
-            id: "xvbuizKzpuA",
-            title: "To Stay Happy...",
+            id: "scVOkIjnWw4",
+            title: "The formula for a stress free life",
             desc: "A meaningful Dhamma message to guide children towards a life filled with wisdom and virtue.",
-            thumb: "https://img.youtube.com/vi/xvbuizKzpuA/0.jpg",
+            thumb: "https://img.youtube.com/vi/scVOkIjnWw4/0.jpg",
             type: "video"
         }
     ],
@@ -1204,7 +1185,7 @@ window.addEventListener('DOMContentLoaded', () => {
         { text: "📚 ඩිජිටල් පුස්තකාලය ළඟදීම — සිරිත් මල්දම, ධම්මපදය, නරසීහ ගාථා සහ ශ්‍රව්‍ය ඇතුළු ග්‍රන්ථ 10+ ක් ළඟදීම!", link: "library.html" },
         { text: "📸 ගැලරිය විවෘතයි — ඔබේ පින්කම් ඡායාරූප සහ වීඩියෝ දැන් Share කරන්න!", link: "gallery.html" },
         { text: "🌐 කාලසටහන (Timetable) නවීකරණය — Teams පන්ති සෘජුවම Join කිරීමේ නව හැකියාව!", link: "#timetable" },
-        { text: "🎓 ශ්‍රී ලංකාව, ජපානය, ඉතාලිය, ඕස්ට්‍රේලියාව, UK ඇතුළු රටවල 6 ක දරුවන්ට Online දහම් පන්ති දැන් ලබාගත හැක!", link: "#timetable" },
+
         { text: "📺 සිව්මග YouTube මාධ්‍ය අවකාශය — ධර්ම දේශනා සහ දහම් කතා දැන් වෙබ් අඩවිය ඇතුළෙන්ම නරඹන්න!", link: "#youtube-preview" },
     ];
 
@@ -1214,7 +1195,7 @@ window.addEventListener('DOMContentLoaded', () => {
         { text: "📚 Digital Library Coming Soon — Sirith Maldama, Dhammapada, Audio Pirith & 10+ Sacred Titles!", link: "library-en.html" },
         { text: "📸 Media Gallery is Live — Share Your Pinkam Photos & Videos With Us!", link: "gallery-en.html" },
         { text: "🌐 Timetable Upgraded — Direct One-Click Teams Classroom Access Now Available!", link: "#timetable" },
-        { text: "🎓 Online Dhamma Classes Now Available for Children in Sri Lanka, Japan, Italy, Australia & the UK!", link: "#timetable" },
+
         { text: "📺 YouTube Media Space Live — Watch Dhamma Discourses & Pirith Chants Without Leaving the Website!", link: "#youtube-preview" },
     ];
 
@@ -1371,7 +1352,7 @@ const newsDatasetEN = {
         title: "Direct Microsoft Teams Classroom Access via Timetable Now Active!",
 
         badge: "Direct Classroom",
-    image: "image/News/class.webp",
+        image: "image/News/class.webp",
         desc: "Previously limited to viewing schedule times, students and parents can now click 'Join Now' on any active class to connect directly to Microsoft Teams.",
         text: [
             "We have modernized our interactive timetable to provide seamless, single-click access to virtual classrooms for students and parents worldwide.",
