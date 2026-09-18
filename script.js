@@ -299,14 +299,15 @@ function isClassActive(item) {
     return currentMinutesSinceMidnight >= startMinutes && currentMinutesSinceMidnight <= endMinutes;
 }
 
-// special class ekak buttone visibleCountfunction isClassActive(item) {
-//     if (item.country === "Japan" && item.sec.includes("Junior")) {
-//         return true;
-//     }
+// special class ekak buttone visibleCount
+function isClassActive(item) {
+    if (item.country === "Sri Lanka" && item.sec.includes("පියවර 1 | 2")) {
+        return true;
+    }
 
-//     const slDate = getSLDate();
+    const slDate = getSLDate();
 
-// }
+}
 
 function formatGender(gender, isEN) {
     if (!isEN) return gender;
