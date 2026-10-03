@@ -243,6 +243,68 @@
             border-radius: 12px;
         }
 
+        /* Tech Stack Badges */
+        .tech-stack-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0 30px 0;
+        }
+
+        .tech-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14.5px;
+            color: #1e293b;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+
+        .tech-badge i {
+            font-size: 22px;
+        }
+
+        .color-html {
+            color: #e34f26;
+        }
+
+        .color-css {
+            color: #1572b6;
+        }
+
+        .color-js {
+            color: #f7df1e;
+        }
+
+        .color-tw {
+            color: #0ea5e9;
+        }
+
+        .color-d3 {
+            color: #f97316;
+        }
+
+        .color-google {
+            color: #4285F4;
+        }
+
+        .color-api {
+            color: #10b981;
+        }
+
         /* Print Controls */
         .print-btn {
             position: fixed;
@@ -351,17 +413,45 @@
 
         <!-- Section 1 -->
         <section>
-            <h2><i class="fas fa-layer-group"></i> 1. Project Overview & Architectural Scope</h2>
+            <h2><i class="fas fa-layer-group"></i> 1. Project Overview & Technology Stack</h2>
             <p>
                 The <strong>Siwmaga Dharmayathanaya Web Portal</strong> is an international Buddhist educational
                 platform designed to connect students, teachers, parents, and devotees across Sri Lanka and overseas
                 communities (Japan, UK, Italy, Australia, Qatar, Canada, USA).
             </p>
+
+            <h3><i class="fas fa-code"></i> Core Technologies Used</h3>
+            <div class="tech-stack-container">
+                <div class="tech-badge">
+                    <i class="fa-brands fa-html5 color-html"></i> HTML5
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-brands fa-css3-alt color-css"></i> CSS3
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-brands fa-js color-js"></i> Vanilla JS (ES6+)
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-solid fa-wind color-tw"></i> Tailwind CSS
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-solid fa-chart-pie color-d3"></i> D3.js
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-brands fa-google color-google"></i> Google Apps Script
+                </div>
+                <div class="tech-badge">
+                    <i class="fa-solid fa-server color-api"></i> REST APIs
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;"><i class="fas fa-sitemap"></i> Architectural Highlights</h3>
             <ul>
                 <li><strong>Dual-Language Multi-Page Architecture:</strong> Full localization across Sinhala
                     (<code>index.html</code>, <code>gallery.html</code>) and English (<code>index-en.html</code>,
                     <code>gallery-en.html</code>) with verified <code>hreflang</code> alternate tags for global search
-                    engine indexing.</li>
+                    engine indexing.
+                </li>
                 <li><strong>Microsoft Teams Remote Class Integration:</strong> Interactive timetable supporting live
                     time-zone conversions (BST, AEST, CEST, JST, AST, EDT) with automated "Live Now" status calculations
                     based on Sri Lanka Standard Time (UTC + 5:30).</li>
@@ -391,8 +481,11 @@
                     </tr>
                     <tr>
                         <td><strong>Bilingual Timetable Engine</strong></td>
-                        <td>Real-time client search filter, medium switcher tabs (Sinhala / English / Japan), dedicated mobile modal drawer, and intelligent time-based validation function for the "Join Class" button with active status popups.</td>
-                        <td>Enables quick lookup of class times and direct Microsoft Teams joining with automated active/inactive time validation.</td>
+                        <td>Real-time client search filter, medium switcher tabs (Sinhala / English / Japan), dedicated
+                            mobile modal drawer, and intelligent time-based validation function for the "Join Class"
+                            button with active status popups.</td>
+                        <td>Enables quick lookup of class times and direct Microsoft Teams joining with automated
+                            active/inactive time validation.</td>
                     </tr>
                     <tr>
                         <td><strong>3D Memory Gallery</strong></td>
@@ -402,8 +495,11 @@
                     </tr>
                     <tr>
                         <td><strong>YouTube Facade Player</strong></td>
-                        <td>Static WebP thumbnail facade that asynchronously mounts the real YouTube iframe only on click. Integrated with dynamic auto-update functionality to instantly sync new videos upon upload to the channel.</td>
-                        <td>Eliminates ~1.2MB of third-party JavaScript on initial page load while ensuring devotees always see the latest uploaded sermons automatically.</td>
+                        <td>Static WebP thumbnail facade that asynchronously mounts the real YouTube iframe only on
+                            click. Integrated with dynamic auto-update functionality to instantly sync new videos upon
+                            upload to the channel.</td>
+                        <td>Eliminates ~1.2MB of third-party JavaScript on initial page load while ensuring devotees
+                            always see the latest uploaded sermons automatically.</td>
                     </tr>
                     <tr>
                         <td><strong>Digital Learning Resource Hub</strong></td>
@@ -525,7 +621,8 @@
             <ul>
                 <li><strong>Semantic HTML5:</strong> Clean document outline with dedicated <code>&lt;header&gt;</code>,
                     <code>&lt;main id="main-content"&gt;</code>, <code>&lt;section&gt;</code>, and
-                    <code>&lt;footer&gt;</code> tags.</li>
+                    <code>&lt;footer&gt;</code> tags.
+                </li>
                 <li><strong>Accessibility (WCAG 2.1 AA):</strong> Added explicit <code>aria-label</code> tags on all
                     icon controls, ARIA modal attributes (<code>role="dialog"</code>, <code>aria-modal="true"</code>),
                     keyboard navigation for sliders (<code>←</code> / <code>→</code>), and <code>Escape</code> key modal
@@ -580,7 +677,7 @@
             elegant UI/UX design with high performance, accessibility, ultra-lightweight JavaScript logic (0.4 MB core
             footprint), and strict web security.<br><br>
             <strong>Submitted By:</strong> NIT IT TEAM<br>
-            <strong>Supervising Faculty / Reviewer:</strong> Department Head / Academic Instructor
+
         </div>
     </main>
 
