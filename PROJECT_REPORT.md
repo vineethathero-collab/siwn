@@ -52,9 +52,9 @@ The application is architected as an ultra-fast, zero-dependency multi-page appl
 | Component / Module | Implementation Details | Key User Benefit |
 | :--- | :--- | :--- |
 | **Hero Slider & Visual Showcase** | Full-width dynamic carousel with smooth cubic-bezier transitions, thumbnail clicking, keyboard navigation (`←` / `→`), and touch swipe support. | Immersive first impression with immediate call-to-actions for admissions and services. |
-| **Bilingual Timetable & Filter Engine** | Real-time search filter and multi-tab switcher (Sinhala / English / Japan Medium) with dedicated responsive mobile modal drawer. | Allows parents and students worldwide to pinpoint class times in their local timezones in seconds. |
+| **Bilingual Timetable & Filter Engine** | Real-time search filter, multi-tab switcher (Sinhala / English / Japan Medium), and intelligent time-based validation function for the "Join Class" button with active status popups. | Allows parents and students worldwide to pinpoint class times and join directly via Microsoft Teams with automated active/inactive time validation. |
 | **3D Memory Carousel** | Perspective-based 3D carousel viewport utilizing CSS `transform-style: preserve-3d` and GPU-accelerated translate offsets. | Engaging visual preview of recent dhamma school events and sacred celebrations. |
-| **YouTube Facade Media Space** | Light-weight facade video container that renders static WebP thumbnails and only loads heavy YouTube `<iframe>` on user interaction. | Eliminates ~1.2MB of render-blocking YouTube third-party JavaScript on initial page load. |
+| **YouTube Facade Media Space** | Light-weight facade video container that renders static WebP thumbnails and only loads heavy YouTube `<iframe>` on user interaction, integrated with an auto-update system for new uploads. | Eliminates ~1.2MB of render-blocking YouTube third-party JavaScript on initial page load while ensuring devotees always see the latest uploaded sermons automatically. |
 | **Interactive News & Modal System** | Horizontal swipeable news cards with auto-rotation, animated progress indicators, and detailed pop-up read modals. | Keeps devotees and students informed about upcoming meritorious events and examinations. |
 | **Digital Learning Resource Hub** | Live auto-rotating resource carousel showcasing Dhammapada, Vandana Gatha, and Sirith Maldama with interactive micro-toasts. | Instant feedback on digital downloads and upcoming educational material availability. |
 | **Global Branch D3.js Map** | Interactive D3.js Mercator projection map rendering global branch coordinates (Sri Lanka, Japan, UK, Italy, USA, Australia, Qatar) with animated curved geodesic lines. | Visualizes Siwmaga's international presence with zero external image dependencies. |
@@ -153,10 +153,33 @@ The application is architected as an ultra-fast, zero-dependency multi-page appl
 
 ---
 
-## 6. Conclusion
+## 6. Key Features for Approval
+
+To obtain publishing permission, we kindly present the following core features implemented for user engagement:
+
+### 6.1 Interactive Timetable & Navigation
+- **Functionality:** A dynamic, multi-language class schedule (Sinhala, English, Japanese Mediums). 
+- **Features:** Includes a smart instant search feature (by country/age limit) and a sticky Mobile Timetable modal button to ensure accessibility for global students across all devices.
+
+### 6.2 YouTube Scope (Media Preview)
+- **Functionality:** A dedicated in-platform YouTube environment.
+- **Features:** It features a main video player for Dhamma sermons and categorized sidebar tabs (Popular, Latest, Shorts) ensuring devotees can stream "Siwmaga" channel content seamlessly without leaving the site.
+
+### 6.3 Advanced Media Gallery
+- **Functionality:** A dynamic photo and video gallery.
+- **Features:** It includes a 3D memory carousel and a dedicated gallery page equipped with categorized filtering (Dhamma, Pinkam, Other), lightbox viewing, and a dedicated modal for users to upload their own memories.
+
+### 6.4 Digital Dhamma Library (Permission Request)
+- **Status:** Currently deployed as "Coming Soon" (`library.html`).
+- **Current Sources:** We have structured the library to host **Vandana Gatha, Pirith, Sirith Maldama, Dhammapadaya, and Audio Dhamma Notes**.
+- **Approval Request:** We kindly request explicit permission to officially publish these specific digital sources to the public. Once approved, the library will be fully activated.
+
+---
+
+## 7. Conclusion
 
 The Siwmaga Dharmayathanaya Web Portal represents a modern, resilient, and accessible web solution. By combining lightweight Vanilla JavaScript modularity with AOT-compiled CSS, smart asset caching, and strict security standards, the platform delivers an optimal user experience for teachers, students, and devotees globally.
 
-**Submitted By:** Development Team  
-**Supervising Faculty / Reviewer:** Academic Instructor  
+**Submitted By:** NIT IT TEAM  
+**Supervising Faculty / Reviewer:** Department Head / Academic Instructor  
 **Repository Location:** `/Users/vineethathero/Desktop/iiii/`

@@ -35,7 +35,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts මඟින් සිංහල සහ ඉංග්‍රීසි අකුරු විලාසිතා එක් කිරීම -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Gemunu+Libre:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Abhaya+Libre:wght@400;500;600;700;800&family=Gemunu+Libre:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <!-- Font Awesome අයිකන එකතුව -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -540,7 +540,10 @@
             <div class="text-center max-w-2xl mx-auto mb-12 reveal-element reveal-scale-up">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-100 text-red-600 text-xs font-bold mb-3 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-                    <span>නිල YouTube නාලිකාව</span>
+                    <span id="yt-sync-badge-text">නිල YouTube නාලිකාව • Auto Sync</span>
+                    <button id="yt-sync-btn" onclick="syncYouTubeFeed(true)" title="නාලිකාව සමග නැවත Sync කරන්න" class="hover:text-red-800 transition-transform flex items-center p-0.5 ml-1">
+                        <i class="fa-solid fa-arrows-rotate text-[11px]" id="yt-sync-icon"></i>
+                    </button>
                 </div>
                 <h2
                     class="text-3xl sm:text-4xl font-extrabold text-slate-800 mb-4 flex items-center justify-center gap-3">
@@ -586,6 +589,7 @@
                             <p class="text-xs text-slate-400 mt-1 flex items-center gap-2">
                                 <span class="text-slate-600">•</span>
                                 <span><i class="fa-regular fa-clock mr-1"></i> සිව්මග ධර්ම ප්‍රකාශනය</span>
+                                <span id="main-youtube-time-tag" class="text-amber-400 font-semibold text-[11px] ml-auto"></span>
                             </p>
                         </div>
                     </div>
@@ -594,17 +598,17 @@
                 <!-- Playlist / Sidebar Video Column (5/12) -->
                 <div class="lg:col-span-5 flex flex-col justify-between gap-4">
                     <!-- Tab selector for YouTube -->
-                    <div class="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800">
-                        <button id="tab-yt-popular" onclick="switchYoutubeTab('popular')"
-                            class="flex-1 py-3 text-xs font-black rounded-xl transition-all duration-300 bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-red-600/20">
-                            ජනප්‍රිය
-                        </button>
+                    <div class="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 gap-1 overflow-x-auto">
                         <button id="tab-yt-latest" onclick="switchYoutubeTab('latest')"
-                            class="flex-1 py-3 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+                            class="flex-1 py-3 px-2 text-xs font-black rounded-xl transition-all duration-300 bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-red-600/20 whitespace-nowrap">
                             නවතම දේශනා
                         </button>
+                        <button id="tab-yt-popular" onclick="switchYoutubeTab('popular')"
+                            class="flex-1 py-3 px-2 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5 whitespace-nowrap">
+                            ජනප්‍රියම
+                        </button>
                         <button id="tab-yt-shorts" onclick="switchYoutubeTab('shorts')"
-                            class="flex-1 py-3 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5 font-bold">
+                            class="flex-1 py-3 px-2 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5 whitespace-nowrap">
                             කෙටි (Shorts)
                         </button>
                     </div>

@@ -167,9 +167,25 @@ const next = document.querySelector('.next-btn');
 const prev = document.querySelector('.prev-btn');
 const slider = document.querySelector('.slide');
 
+function refreshActiveSlideContent() {
+    if (!slider) return;
+    const items = slider.querySelectorAll('.item');
+    if (items.length > 1) {
+        const activeContent = items[1].querySelector('.content');
+        if (activeContent) {
+            // Instant visibility guarantee
+            activeContent.style.display = 'block';
+            activeContent.style.opacity = '1';
+        }
+    }
+}
+
 function slideNext() {
     let items = document.querySelectorAll('.item');
-    if (slider && items.length > 0) slider.appendChild(items[0]);
+    if (slider && items.length > 0) {
+        slider.appendChild(items[0]);
+        refreshActiveSlideContent();
+    }
 }
 
 if (next) {
@@ -179,7 +195,10 @@ if (next) {
 if (prev) {
     prev.onclick = function () {
         let items = document.querySelectorAll('.item');
-        if (slider && items.length > 0) slider.prepend(items[items.length - 1]);
+        if (slider && items.length > 0) {
+            slider.prepend(items[items.length - 1]);
+            refreshActiveSlideContent();
+        }
     }
 }
 
@@ -299,14 +318,15 @@ function isClassActive(item) {
     return currentMinutesSinceMidnight >= startMinutes && currentMinutesSinceMidnight <= endMinutes;
 }
 
-// special class ekak buttone visibleCountfunction isClassActive(item) {
-//     if (item.country === "Japan" && item.sec.includes("Junior")) {
-//         return true;
-//     }
+//special class ekak buttone 
+function isClassActive(item) {
+    if (item.country === "Sri Lanka" && item.sec.includes("සිව්මග දරුවෝ පියවර 1 | 2")) {
+        return true;
+    }
 
-//     const slDate = getSLDate();
+    const slDate = getSLDate();
 
-// }
+}
 
 function formatGender(gender, isEN) {
     if (!isEN) return gender;
@@ -1217,18 +1237,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================================
-// SIWMAGA YOUTUBE MEDIA SPACE — DYNAMIC AUTO-LOAD ENGINE
+// SIWMAGA YOUTUBE MEDIA SPACE — DYNAMIC AUTO-SYNC ENGINE
 // ============================================================
 
 const SIWMAGA_YOUTUBE_CHANNELS = {
     si: {
         id: "UCDdevyocMwxh1twdKDc8WeA",
-        name: "Siwmaga Sinhala",
+        uploadsPlaylistId: "UUDdevyocMwxh1twdKDc8WeA",
+        name: "siwmaga",
+        title: "සිව්මග නිල YouTube නාලිකාව",
         subscribeUrl: "https://www.youtube.com/channel/UCDdevyocMwxh1twdKDc8WeA?sub_confirmation=1"
     },
     en: {
         id: "UCOsVMjnhjCKgh0LIG6n_D5A",
-        name: "Siwmaga English / Dhamma School",
+        uploadsPlaylistId: "UUOsVMjnhjCKgh0LIG6n_D5A",
+        name: "Siwmaga_eng",
+        title: "Siwmaga English / Dhamma School",
         subscribeUrl: "https://www.youtube.com/channel/UCOsVMjnhjCKgh0LIG6n_D5A?sub_confirmation=1"
     }
 };
@@ -1261,6 +1285,13 @@ const youthYoutubeData = {
             title: "තරුණ පරපුරට ජීවිතය දිනන්නට දහම් උපදෙස්",
             desc: "නැරඹුම් වාර දහස් ගණනක් පසුකළ විශිෂ්ට දේශනාව",
             thumb: "https://img.youtube.com/vi/UomBOw-x0Zc/hqdefault.jpg",
+            type: "video"
+        },
+        {
+            id: "xt0GDSVk4J4",
+            title: "ඔබ සතුටින්ද ඉන්නේ?",
+            desc: "නියම සතුට හා මනසේ සැනසීම ළඟා කරගැනීමට පෙන්වා දෙන උතුම් මඟ",
+            thumb: "https://img.youtube.com/vi/xt0GDSVk4J4/hqdefault.jpg",
             type: "video"
         }
     ],
@@ -1309,6 +1340,13 @@ const youthYoutubeDataEN = {
             desc: "A featured Dhamma discourse exploring life, mindfulness, and technology.",
             thumb: "https://img.youtube.com/vi/ftlNqMJmuMQ/hqdefault.jpg",
             type: "video"
+        },
+        {
+            id: "WzcoCePu5nQ",
+            title: "The Art of Giving",
+            desc: "A featured Buddhist discourse from Siwmaga on the value and peace of giving.",
+            thumb: "https://img.youtube.com/vi/WzcoCePu5nQ/hqdefault.jpg",
+            type: "video"
         }
     ],
     popular: [
@@ -1332,31 +1370,64 @@ function getActiveYouthYoutubeData() {
     return document.documentElement.lang === 'en' ? youthYoutubeDataEN : youthYoutubeData;
 }
 
-let currentActiveTab = 'popular';
+const YT_CACHE_KEY_PREFIX = "siwmaga_yt_feed_v3_";
+const YT_CACHE_TTL_MS = 25 * 60 * 1000; // 25 minutes cache validity
+
+let currentActiveTab = 'latest';
 let currentlySelectedVideoId = "";
 let isIframeActive = false;
 
-function changeMainVideo(youtubeId, title) {
+// Format relative publish date (Sinhala & English)
+function formatTimeAgo(dateString, isEn) {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "";
+    const diffSeconds = Math.floor((Date.now() - date.getTime()) / 1000);
+    if (diffSeconds < 60) return isEn ? "Just now" : "මීට සුළු මොහොතකට පෙර";
+    if (diffSeconds < 3600) {
+        const mins = Math.max(1, Math.floor(diffSeconds / 60));
+        return isEn ? `${mins}m ago` : `මිනිත්තු ${mins} කට පෙර`;
+    }
+    if (diffSeconds < 86400) {
+        const hours = Math.floor(diffSeconds / 3600);
+        return isEn ? `${hours}h ago` : `පැය ${hours} කට පෙර`;
+    }
+    const days = Math.floor(diffSeconds / 86400);
+    if (days < 30) {
+        return isEn ? `${days}d ago` : `දින ${days} කට පෙර`;
+    }
+    const months = Math.floor(days / 30);
+    return isEn ? `${months}mo ago` : `මසකට පෙර`;
+}
+
+function changeMainVideo(youtubeId, title, timeAgo = "") {
     if (!youtubeId) return;
     currentlySelectedVideoId = youtubeId;
-    
+
     const videoTitle = document.getElementById('main-youtube-title');
     if (videoTitle && title) videoTitle.innerText = title;
+
+    const timeTag = document.getElementById('main-youtube-time-tag');
+    if (timeTag) {
+        timeTag.innerText = timeAgo ? `• ${timeAgo}` : "";
+    }
 
     if (isIframeActive) {
         const iframe = document.getElementById('main-youtube-iframe');
         if (iframe) {
             iframe.style.opacity = '0';
             setTimeout(() => {
-                iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+                iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
                 iframe.style.opacity = '1';
             }, 200);
         }
     } else {
         const facadeImg = document.getElementById('facade-thumbnail');
         if (facadeImg) {
-            facadeImg.src = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
-            facadeImg.setAttribute('data-src', `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`);
+            const thumbUrl = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
+            facadeImg.src = thumbUrl;
+            facadeImg.setAttribute('data-src', thumbUrl);
+            facadeImg.alt = title || "Siwmaga YouTube Video";
         }
     }
 
@@ -1372,14 +1443,36 @@ function changeMainVideo(youtubeId, title) {
     });
 }
 
-function activateRealYoutubeIframe() {
+function activateRealYoutubeIframe(isPlaylist = false) {
     const container = document.getElementById('yt-player-container');
     if (!container) return;
 
+    const isEn = document.documentElement.lang === 'en';
+    const channelConfig = isEn ? SIWMAGA_YOUTUBE_CHANNELS.en : SIWMAGA_YOUTUBE_CHANNELS.si;
+
+    if (isPlaylist || currentActiveTab === 'playlist') {
+        const playlistId = channelConfig.uploadsPlaylistId;
+        container.innerHTML = `
+            <iframe id="main-youtube-iframe" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" 
+                src="https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0" 
+                title="${channelConfig.name} Live Playlist" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+        `;
+        isIframeActive = true;
+        const videoTitle = document.getElementById('main-youtube-title');
+        if (videoTitle) {
+            videoTitle.innerText = isEn ? "Continuous Live Channel Playlist" : "නාලිකාවේ සජීවී සම්පූර්ණ Playlist එක";
+        }
+        return;
+    }
+
     if (!currentlySelectedVideoId) {
         const activeData = getActiveYouthYoutubeData();
-        const firstItem = (activeData[currentActiveTab] && activeData[currentActiveTab][0]) || 
-                          (activeData.latest && activeData.latest[0]);
+        const firstItem = (activeData[currentActiveTab] && activeData[currentActiveTab][0]) ||
+            (activeData.latest && activeData.latest[0]) ||
+            (activeData.popular && activeData.popular[0]);
         if (firstItem) currentlySelectedVideoId = firstItem.id;
     }
 
@@ -1397,14 +1490,14 @@ function activateRealYoutubeIframe() {
 function switchYoutubeTab(tab) {
     currentActiveTab = tab;
 
-    const tabs = ['latest', 'popular', 'shorts'];
+    const tabs = ['latest', 'popular', 'shorts', 'playlist'];
     tabs.forEach(t => {
         const btn = document.getElementById(`tab-yt-${t}`);
         if (btn) {
             if (t === tab) {
-                btn.className = "flex-1 py-3 text-xs font-black rounded-xl transition-all duration-300 bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-red-600/20";
+                btn.className = "flex-1 py-3 px-2 text-xs font-black rounded-xl transition-all duration-300 bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-red-600/20 whitespace-nowrap";
             } else {
-                btn.className = "flex-1 py-3 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5";
+                btn.className = "flex-1 py-3 px-2 text-xs font-bold rounded-xl transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-1.5 whitespace-nowrap";
             }
         }
     });
@@ -1416,21 +1509,52 @@ function renderPlaylist(tab) {
     const container = document.getElementById('youtube-sidebar-playlist');
     if (!container) return;
 
+    const isEn = document.documentElement.lang === 'en';
+    const channelConfig = isEn ? SIWMAGA_YOUTUBE_CHANNELS.en : SIWMAGA_YOUTUBE_CHANNELS.si;
+
+    // Special Tab: Live Playlist Continuous Stream
+    if (tab === 'playlist') {
+        container.innerHTML = `
+            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-slate-300 space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500 text-xl flex-shrink-0">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">${isEn ? "Continuous Live Channel Playlist" : "නාලිකාවේ සජීවී සම්පූර්ණ Playlist එක"}</h4>
+                        <p class="text-[11px] text-slate-400 mt-0.5">${isEn ? "Plays all uploaded Dhamma discourses in order automatically." : "නාලිකාවට එක්වන සෑම නවතම දේශනාවක්ම පිළිවෙළින් ස්වයංක්‍රීයව වාදනය වේ."}</p>
+                    </div>
+                </div>
+                <button onclick="activateRealYoutubeIframe(true)" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-play"></i> ${isEn ? "Play Continuous Stream" : "සජීවී Playlist එක වාදනය කරන්න"}
+                </button>
+                <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>${isEn ? "Auto-synced with YouTube" : "YouTube සමඟ සෘජුවම සම්බන්ධයි"}</span>
+                    <a href="${channelConfig.subscribeUrl}" target="_blank" class="text-red-400 hover:underline flex items-center gap-1">
+                        ${isEn ? "Open Channel" : "චැනලය බලන්න"} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
     container.innerHTML = '';
-    const items = getActiveYouthYoutubeData()[tab] || [];
+    const activeData = getActiveYouthYoutubeData();
+    const items = activeData[tab] || [];
 
     if (items.length === 0) {
         container.innerHTML = `
             <div class="p-6 text-center text-slate-400 text-xs">
                 <i class="fa-solid fa-spinner fa-spin text-red-500 text-base mb-2"></i>
-                <p>වීඩියෝ පූරණය වෙමින් පවතී...</p>
+                <p>${isEn ? "Loading videos from YouTube channel..." : "වීඩියෝ පූරණය වෙමින් පවතී..."}</p>
             </div>
         `;
         return;
     }
 
     items.forEach((item, index) => {
-        const isSpecial = item.special ? 'glowing-short-border border-2' : '';
+        const timeAgo = item.published ? formatTimeAgo(item.published, isEn) : '';
         const specialBadge = item.special
             ? `<span class="absolute top-1 left-1 bg-gradient-to-r from-yellow-500 to-red-500 text-[8px] font-black uppercase px-1.5 py-0.5 rounded tracking-wider shadow animate-bounce">🔥 1M+ Views</span>`
             : (item.isNew ? `<span class="absolute top-1 left-1 bg-red-600 text-white text-[8px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider shadow">NEW</span>` : '');
@@ -1439,8 +1563,8 @@ function renderPlaylist(tab) {
         const isSelected = item.id === currentlySelectedVideoId || (!currentlySelectedVideoId && index === 0);
 
         const cardHTML = `
-            <button onclick="changeMainVideo('${item.id}', '${safeTitle}')" 
-                    class="youtube-side-item w-full flex items-center gap-3 p-2.5 rounded-2xl border ${isSelected ? 'border-red-500 bg-red-500/15' : 'border-transparent'} bg-slate-900/60 hover:bg-slate-900 text-left transition-all duration-300 relative group overflow-hidden" 
+            <button onclick="changeMainVideo('${item.id}', '${safeTitle}', '${timeAgo}')" 
+                    class="youtube-side-item w-full flex items-center gap-3 p-2.5 rounded-2xl border ${isSelected ? 'border-red-500 bg-red-500/15 shadow-md shadow-red-500/10' : 'border-transparent'} bg-slate-900/60 hover:bg-slate-900 text-left transition-all duration-300 relative group overflow-hidden" 
                     data-video-id="${item.id}">
                 
                 <div class="relative w-24 h-16 rounded-xl overflow-hidden bg-slate-800 flex-shrink-0">
@@ -1453,7 +1577,10 @@ function renderPlaylist(tab) {
 
                 <div class="flex-grow min-w-0">
                     <h4 class="text-xs sm:text-sm font-bold text-white truncate leading-snug group-hover:text-red-400 transition-colors">${item.title}</h4>
-                    <p class="text-[10px] sm:text-xs text-slate-400 mt-1 truncate">${item.desc || (item.type === 'short' ? 'Short Video' : 'Dhamma Discourse')}</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <p class="text-[10px] sm:text-xs text-slate-400 truncate">${item.desc || (item.type === 'short' ? 'Short Video' : (isEn ? 'Dhamma Discourse' : 'ධර්ම දේශනාව'))}</p>
+                        ${timeAgo ? `<span class="text-[10px] text-amber-400/80 font-medium whitespace-nowrap ml-auto flex-shrink-0">• ${timeAgo}</span>` : ''}
+                    </div>
                 </div>
             </button>
         `;
@@ -1461,118 +1588,364 @@ function renderPlaylist(tab) {
     });
 
     if (items.length > 0 && !currentlySelectedVideoId) {
-        changeMainVideo(items[0].id, items[0].title);
+        changeMainVideo(items[0].id, items[0].title, items[0].published ? formatTimeAgo(items[0].published, isEn) : "");
     }
 }
 
-// Auto-Load YouTube videos directly from channel RSS / APIs
-async function autoLoadSiwmagaYouTubeFeed() {
+// Parse YouTube Atom RSS Feed XML
+function parseYouTubeXmlFeed(xmlString, isEn) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+    
+    if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+        throw new Error("XML parse error");
+    }
+
+    const entries = Array.from(xmlDoc.getElementsByTagName("entry"));
+    if (!entries || entries.length === 0) {
+        throw new Error("No entries in XML feed");
+    }
+
+    const fetchedVideos = [];
+    const fetchedShorts = [];
+
+    entries.forEach((entry, index) => {
+        let videoId = "";
+        const ytVideoId = entry.getElementsByTagNameNS("http://www.youtube.com/xml/schemas/2015", "videoId")[0] ||
+                          entry.getElementsByTagName("yt:videoId")[0] ||
+                          entry.getElementsByTagName("videoId")[0];
+        if (ytVideoId && ytVideoId.textContent) {
+            videoId = ytVideoId.textContent.trim();
+        } else {
+            const idElem = entry.getElementsByTagName("id")[0];
+            if (idElem && idElem.textContent) {
+                videoId = idElem.textContent.replace("yt:video:", "").trim();
+            }
+        }
+
+        if (!videoId) {
+            const linkElem = entry.getElementsByTagName("link")[0];
+            if (linkElem && linkElem.getAttribute("href")) {
+                const match = linkElem.getAttribute("href").match(/(?:v=|\/shorts\/|youtu\.be\/)([\w-]{11})/);
+                if (match) videoId = match[1];
+            }
+        }
+
+        if (!videoId) return;
+
+        const titleElem = entry.getElementsByTagName("title")[0];
+        const title = titleElem ? titleElem.textContent.trim() : (isEn ? "Siwmaga Dhamma Discourse" : "සිව්මග ධර්ම දේශනාව");
+
+        const publishedElem = entry.getElementsByTagName("published")[0];
+        const published = publishedElem ? publishedElem.textContent.trim() : "";
+
+        let desc = "";
+        const mediaGroup = entry.getElementsByTagNameNS("http://search.yahoo.com/mrss/", "group")[0] ||
+                           entry.getElementsByTagName("media:group")[0];
+        if (mediaGroup) {
+            const descElem = mediaGroup.getElementsByTagNameNS("http://search.yahoo.com/mrss/", "description")[0] ||
+                             mediaGroup.getElementsByTagName("media:description")[0];
+            if (descElem) desc = descElem.textContent.trim();
+        }
+        if (!desc) {
+            const descElem = entry.getElementsByTagName("description")[0];
+            if (descElem) desc = descElem.textContent.trim();
+        }
+        desc = desc.replace(/<[^>]*>?/gm, '').slice(0, 100);
+        if (desc) desc += '...';
+
+        const isShort = title.toLowerCase().includes('#shorts') ||
+                        title.toLowerCase().includes('#short') ||
+                        desc.toLowerCase().includes('#shorts');
+
+        const videoObj = {
+            id: videoId,
+            title: title,
+            desc: desc || (isShort ? "Short Video" : (isEn ? "Official Siwmaga Dhamma Publication" : "සිව්මග නිල ධර්ම ප්‍රකාශනය")),
+            thumb: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+            type: isShort ? "short" : "video",
+            published: published,
+            isNew: index < 2
+        };
+
+        if (isShort) {
+            fetchedShorts.push(videoObj);
+        } else {
+            fetchedVideos.push(videoObj);
+        }
+    });
+
+    return { fetchedVideos, fetchedShorts };
+}
+
+// Parse YouTube JSON Feed from rss2json
+function parseYouTubeJsonFeed(data, isEn) {
+    if (!data || !Array.isArray(data.items) || data.items.length === 0) {
+        throw new Error("Invalid or empty JSON feed items");
+    }
+    const fetchedVideos = [];
+    const fetchedShorts = [];
+
+    data.items.forEach((item, index) => {
+        let videoId = "";
+        if (item.guid && item.guid.includes("yt:video:")) {
+            videoId = item.guid.replace("yt:video:", "").trim();
+        } else if (item.link) {
+            const match = item.link.match(/(?:watch\?v=|\/shorts\/|youtu\.be\/)([\w-]{11})/);
+            if (match) videoId = match[1];
+        }
+
+        if (!videoId) return;
+
+        const isShort = (item.link && item.link.includes('/shorts/')) ||
+            (item.title && (item.title.toLowerCase().includes('#shorts') || item.title.toLowerCase().includes('#short')));
+
+        const videoObj = {
+            id: videoId,
+            title: item.title || (isEn ? "Siwmaga Dhamma Talk" : "සිව්මග ධර්ම දේශනාව"),
+            desc: item.description ? item.description.replace(/<[^>]*>?/gm, '').slice(0, 100) + '...' : (isEn ? "Official Siwmaga YouTube Publication" : "සිව්මග නිල ධර්ම ප්‍රකාශනය"),
+            thumb: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+            type: isShort ? "short" : "video",
+            published: item.pubDate || "",
+            isNew: index < 2
+        };
+
+        if (isShort) {
+            fetchedShorts.push(videoObj);
+        } else {
+            fetchedVideos.push(videoObj);
+        }
+    });
+
+    return { fetchedVideos, fetchedShorts };
+}
+
+// Multi-Proxy RSS Feed fetcher with cascading fallback
+async function fetchChannelFeed(channelId, isEn) {
+    const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+    const proxyList = [
+        {
+            type: 'xml',
+            url: `https://api.allorigins.win/raw?url=${encodeURIComponent(rssFeedUrl)}`
+        },
+        {
+            type: 'xml',
+            url: `https://corsproxy.io/?url=${encodeURIComponent(rssFeedUrl)}`
+        },
+        {
+            type: 'xml',
+            url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssFeedUrl)}`
+        },
+        {
+            type: 'allorigins_json',
+            url: `https://api.allorigins.win/get?url=${encodeURIComponent(rssFeedUrl)}`
+        },
+        {
+            type: 'rss2json',
+            url: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`
+        }
+    ];
+
+    for (const proxy of proxyList) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 4500);
+            const response = await fetch(proxy.url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+
+            if (!response.ok) continue;
+
+            if (proxy.type === 'xml') {
+                const text = await response.text();
+                if (text && text.includes('<feed') && text.includes('<entry')) {
+                    const result = parseYouTubeXmlFeed(text, isEn);
+                    if (result.fetchedVideos.length > 0 || result.fetchedShorts.length > 0) {
+                        return result;
+                    }
+                }
+            } else if (proxy.type === 'allorigins_json') {
+                const json = await response.json();
+                if (json && json.contents && json.contents.includes('<feed')) {
+                    const result = parseYouTubeXmlFeed(json.contents, isEn);
+                    if (result.fetchedVideos.length > 0 || result.fetchedShorts.length > 0) {
+                        return result;
+                    }
+                }
+            } else if (proxy.type === 'rss2json') {
+                const json = await response.json();
+                if (json && json.status === 'ok' && Array.isArray(json.items) && json.items.length > 0) {
+                    const result = parseYouTubeJsonFeed(json, isEn);
+                    if (result.fetchedVideos.length > 0 || result.fetchedShorts.length > 0) {
+                        return result;
+                    }
+                }
+            }
+        } catch (e) {
+            // Cascade to next proxy
+            continue;
+        }
+    }
+
+    throw new Error('All YouTube feed proxies were unreachable or timed out');
+}
+
+// Apply synced videos into runtime data structures & update UI
+function applySyncedYouTubeFeed(fetchedVideos, fetchedShorts, isEn) {
+    const targetData = isEn ? youthYoutubeDataEN : youthYoutubeData;
+    
+    // Default Popular Channel Videos (Long format discourses)
+    const baselinePopular = isEn ? [
+        { id: "rfpsJQTyUq4", title: "Who Is the Hijacker of Your Mind?", desc: "Most viewed Dhamma discourse from Siwmaga", thumb: "https://img.youtube.com/vi/rfpsJQTyUq4/hqdefault.jpg", type: "video" },
+        { id: "B4NGnL-SZvY", title: "This is why you are gifted", desc: "Top rated Dhamma video from Siwmaga", thumb: "https://img.youtube.com/vi/B4NGnL-SZvY/hqdefault.jpg", type: "video" },
+        { id: "6l1MZIkNHEU", title: "Kali Miththa Theri", desc: "Popular Dhamma discourse from Siwmaga Dhamma School", thumb: "https://img.youtube.com/vi/6l1MZIkNHEU/hqdefault.jpg", type: "video" },
+        { id: "ftlNqMJmuMQ", title: "Life and Internet", desc: "High engagement Dhamma discourse", thumb: "https://img.youtube.com/vi/ftlNqMJmuMQ/hqdefault.jpg", type: "video" },
+        { id: "WzcoCePu5nQ", title: "The Art of Giving", desc: "Essential Dhamma reflection", thumb: "https://img.youtube.com/vi/WzcoCePu5nQ/hqdefault.jpg", type: "video" }
+    ] : [
+        { id: "9VN7v9Z-v0k", title: "ඇත්තටම නිවන් දකින්න ඕනද?", desc: "ලක්ෂ සංඛ්‍යාත පිරිසක් නැරඹූ විශිෂ්ට දේශනාව", thumb: "https://img.youtube.com/vi/9VN7v9Z-v0k/hqdefault.jpg", type: "video" },
+        { id: "Hbx5Ep-5Uj0", title: "රුපියල් 5000, 10000 වුන හැටි", desc: "නූතන සමාජයට ගැළපෙන සැබෑ දහම් සන්නිවේදනය", thumb: "https://img.youtube.com/vi/Hbx5Ep-5Uj0/hqdefault.jpg", type: "video" },
+        { id: "1cH8uEQzPhg", title: "සසර නම් විහිලුවේ සරදම ඔබද?", desc: "ජීවිතය දිනන්නට මඟ පෙන්වන උතුම් දේශනාව", thumb: "https://img.youtube.com/vi/1cH8uEQzPhg/hqdefault.jpg", type: "video" },
+        { id: "UomBOw-x0Zc", title: "තරුණ පරපුරට ජීවිතය දිනන්නට දහම් උපදෙස්", desc: "නැරඹුම් වාර දහස් ගණනක් පසුකළ විශිෂ්ට දේශනාව", thumb: "https://img.youtube.com/vi/UomBOw-x0Zc/hqdefault.jpg", type: "video" },
+        { id: "niRsWkJ9Ccs", title: "පවුලේ සැමට සැනසීම ළඟා කරන ආශිර්වාද සෙත්", desc: "නිවසට සෞභාග්‍යය උදා කරන බලසම්පන්න සජ්ඣායනය", thumb: "https://img.youtube.com/vi/niRsWkJ9Ccs/hqdefault.jpg", type: "video" }
+    ];
+
+    // Special 1 Million+ Views Short Video
+    const specialOneMillionShort = isEn ? {
+        id: "scVOkIjnWw4",
+        title: "Why do movies Exist?",
+        desc: "🔥 1M+ Views Special • Siwmaga Official Short Video",
+        thumb: "https://img.youtube.com/vi/scVOkIjnWw4/hqdefault.jpg",
+        type: "short",
+        special: true
+    } : {
+        id: "jxRbyOL5vOw",
+        title: "මට ඔබව ඕන වේලාවක අඩවන්න පුලුවන්",
+        desc: "🔥 1M+ Views Special • Siwmaga Official Short Video",
+        thumb: "https://img.youtube.com/vi/jxRbyOL5vOw/hqdefault.jpg",
+        type: "short",
+        special: true
+    };
+
+    // 1. Latest Sermons Tab: ONLY full/long videos (no shorts, at least 5 videos)
+    const fallbackLatest = isEn ? youthYoutubeDataEN.latest : youthYoutubeData.latest;
+    if (fetchedVideos && fetchedVideos.length > 0) {
+        const onlyLongVideos = fetchedVideos.filter(v => v.type !== 'short');
+        const mergedLatest = [...onlyLongVideos];
+        fallbackLatest.forEach(bv => {
+            if (!mergedLatest.some(v => v.id === bv.id)) {
+                mergedLatest.push(bv);
+            }
+        });
+        targetData.latest = mergedLatest.slice(0, Math.max(5, onlyLongVideos.length));
+    } else {
+        targetData.latest = fallbackLatest;
+    }
+
+    // 2. Popular Tab: Channel Popular Long Videos
+    targetData.popular = baselinePopular;
+
+    // 3. Shorts Tab: 1 Million short ALWAYS first, followed by fresh new shorts
+    const newShorts = (fetchedShorts || []).filter(s => s.id !== specialOneMillionShort.id);
+    const fallbackShorts = (targetData.shorts || []).filter(s => s.id !== specialOneMillionShort.id);
+    const combinedShorts = [specialOneMillionShort, ...(newShorts.length > 0 ? newShorts : fallbackShorts)];
+    targetData.shorts = combinedShorts;
+
+    // Refresh currently rendered tab
+    renderPlaylist(currentActiveTab);
+
+    // If video player has not been actively played yet, set facade to newest upload
+    if (!isIframeActive) {
+        const topItem = (targetData[currentActiveTab] && targetData[currentActiveTab][0]) ||
+                        (targetData.latest && targetData.latest[0]);
+        if (topItem) {
+            changeMainVideo(topItem.id, topItem.title, topItem.published ? formatTimeAgo(topItem.published, isEn) : "");
+        }
+    }
+}
+
+// Master Channel Sync Function (with localStorage caching and manual refresh)
+async function syncYouTubeFeed(forceRefresh = false) {
     const isEn = document.documentElement.lang === 'en';
     const channelConfig = isEn ? SIWMAGA_YOUTUBE_CHANNELS.en : SIWMAGA_YOUTUBE_CHANNELS.si;
-    const targetData = isEn ? youthYoutubeDataEN : youthYoutubeData;
+    const cacheKey = YT_CACHE_KEY_PREFIX + (isEn ? 'en' : 'si');
 
-    try {
-        // Fetch public YouTube RSS feed converted via rss2json
-        const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelConfig.id}`;
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-        
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 6000);
+    const badgeText = document.getElementById('yt-sync-badge-text');
+    const syncIcon = document.getElementById('yt-sync-icon');
 
-        const response = await fetch(apiUrl, { signal: controller.signal });
-        clearTimeout(timeoutId);
+    if (syncIcon) syncIcon.classList.add('fa-spin');
+    if (badgeText && forceRefresh) {
+        badgeText.innerText = isEn ? "Syncing with YouTube Channel..." : "නාලිකාව සමග Sync වෙමින් පවතී...";
+    }
 
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-
-        if (data && data.status === 'ok' && Array.isArray(data.items) && data.items.length > 0) {
-            const fetchedVideos = [];
-            const fetchedShorts = [];
-
-            data.items.forEach((item, index) => {
-                // Extract video ID from guid (yt:video:ID) or link
-                let videoId = "";
-                if (item.guid && item.guid.includes("yt:video:")) {
-                    videoId = item.guid.replace("yt:video:", "");
-                } else if (item.link) {
-                    const match = item.link.match(/(?:watch\?v=|\/shorts\/|youtu\.be\/)([\w-]{11})/);
-                    if (match) videoId = match[1];
-                }
-
-                if (!videoId) return;
-
-                const isShort = (item.link && item.link.includes('/shorts/')) || 
-                                (item.title && item.title.toLowerCase().includes('#shorts'));
-
-                const videoObj = {
-                    id: videoId,
-                    title: item.title || (isEn ? "Siwmaga Dhamma Talk" : "සිව්මග ධර්ම දේශනාව"),
-                    desc: item.description ? item.description.replace(/<[^>]*>?/gm, '').slice(0, 100) + '...' : (isEn ? "Official Siwmaga YouTube Publication" : "සිව්මග නිල ධර්ම ප්‍රකාශනය"),
-                    thumb: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-                    type: isShort ? "short" : "video",
-                    isNew: index < 2
-                };
-
-                if (isShort) {
-                    fetchedShorts.push(videoObj);
-                } else {
-                    fetchedVideos.push(videoObj);
-                }
-            });
-
-            // If we got valid items, merge dynamically with baseline videos so we always have 4-5+ items
-            if (fetchedVideos.length > 0 || fetchedShorts.length > 0) {
-                // Baseline popular/featured items to prevent list dropping below 4 items
-                const baselineVideos = isEn ? [
-                    { id: "rfpsJQTyUq4", title: "Who Is the Hijacker of Your Mind?", desc: "A Dhamma message to help children see the world with wisdom.", thumb: "https://img.youtube.com/vi/rfpsJQTyUq4/hqdefault.jpg", type: "video" },
-                    { id: "B4NGnL-SZvY", title: "This is why you are gifted", desc: "A thoughtful Dhamma message to help children see the world with wisdom.", thumb: "https://img.youtube.com/vi/B4NGnL-SZvY/hqdefault.jpg", type: "video" },
-                    { id: "6l1MZIkNHEU", title: "Kali Miththa Theri", desc: "A featured Dhamma discourse from Siwmaga Dhamma School.", thumb: "https://img.youtube.com/vi/6l1MZIkNHEU/hqdefault.jpg", type: "video" },
-                    { id: "ftlNqMJmuMQ", title: "Life and Internet", desc: "A featured Dhamma discourse from Siwmaga.", thumb: "https://img.youtube.com/vi/ftlNqMJmuMQ/hqdefault.jpg", type: "video" },
-                    { id: "WzcoCePu5nQ", title: "The Art of Giving", desc: "A featured Buddhist discourse on generosity.", thumb: "https://img.youtube.com/vi/WzcoCePu5nQ/hqdefault.jpg", type: "video" }
-                ] : [
-                    { id: "9VN7v9Z-v0k", title: "ඇත්තටම නිවන් දකින්න ඕනද?", desc: "නිවන මූලික කරගත් නිවැරදි අවබෝධයෙන් ලොව දකින උතුම් දහම් අත්වැල", thumb: "https://img.youtube.com/vi/9VN7v9Z-v0k/hqdefault.jpg", type: "video" },
-                    { id: "Hbx5Ep-5Uj0", title: "රුපියල් 5000, 10000 වුන හැටි", desc: "නූතන සමාජයට ගැළපෙන සැබෑ දහම් සන්නිවේදනය", thumb: "https://img.youtube.com/vi/Hbx5Ep-5Uj0/hqdefault.jpg", type: "video" },
-                    { id: "1cH8uEQzPhg", title: "සසර නම් විහිලුවේ සරදම ඔබද?", desc: "ජීවිතය දිනන්නට මඟ පෙන්වන උතුම් දේශනාව", thumb: "https://img.youtube.com/vi/1cH8uEQzPhg/hqdefault.jpg", type: "video" },
-                    { id: "UomBOw-x0Zc", title: "තරුණ පරපුරට ජීවිතය දිනන්නට දහම් උපදෙස්", desc: "නැරඹුම් වාර දහස් ගණනක් පසුකළ විශිෂ්ට දේශනාව", thumb: "https://img.youtube.com/vi/UomBOw-x0Zc/hqdefault.jpg", type: "video" },
-                    { id: "ZMtJvYUMaSc", title: "නිවැරදි මාවත සොයායන තාරුණ්‍යයට බුදු දහම", desc: "නූතන සමාජයට ගැළපෙන සැබෑ දහම් සන්නිවේදනය", thumb: "https://img.youtube.com/vi/ZMtJvYUMaSc/hqdefault.jpg", type: "video" }
-                ];
-
-                // Merge fetched videos with baseline to ensure exactly 4 latest videos
-                const mergedLatest = [...fetchedVideos];
-                baselineVideos.forEach(bv => {
-                    if (!mergedLatest.some(v => v.id === bv.id)) {
-                        mergedLatest.push(bv);
+    // 1. Instant cache check if not forced
+    if (!forceRefresh) {
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                if (parsed && Array.isArray(parsed.videos) && parsed.videos.length > 0) {
+                    applySyncedYouTubeFeed(parsed.videos, parsed.shorts || [], isEn);
+                    if (badgeText) {
+                        badgeText.innerHTML = isEn 
+                            ? `<span class="text-emerald-600 font-extrabold">● Synced</span> with @${channelConfig.name}` 
+                            : `<span class="text-emerald-600 font-extrabold">● Sync විය</span> (@${channelConfig.name})`;
                     }
-                });
-
-                targetData.latest = mergedLatest.slice(0, 4);
-                targetData.popular = baselineVideos;
-
-                if (fetchedShorts.length > 0) {
-                    targetData.shorts = fetchedShorts;
+                    if (Date.now() - parsed.timestamp < YT_CACHE_TTL_MS) {
+                        if (syncIcon) syncIcon.classList.remove('fa-spin');
+                        return;
+                    }
                 }
+            }
+        } catch (e) {
+            console.warn("YouTube cache read notice:", e);
+        }
+    }
 
-                // Render active tab with fresh content
-                renderPlaylist(currentActiveTab);
-                
-                // If main video not yet actively chosen or matches default, update from active tab
-                const currentList = targetData[currentActiveTab] || targetData.popular || targetData.latest;
-                if (currentList && currentList.length > 0 && !isIframeActive) {
-                    changeMainVideo(currentList[0].id, currentList[0].title);
-                }
+    // 2. Fetch fresh feed from channel
+    try {
+        const { fetchedVideos, fetchedShorts } = await fetchChannelFeed(channelConfig.id, isEn);
+        if (fetchedVideos.length > 0 || fetchedShorts.length > 0) {
+            try {
+                localStorage.setItem(cacheKey, JSON.stringify({
+                    timestamp: Date.now(),
+                    videos: fetchedVideos,
+                    shorts: fetchedShorts
+                }));
+            } catch (e) {
+                console.warn("YouTube cache write notice:", e);
+            }
+
+            applySyncedYouTubeFeed(fetchedVideos, fetchedShorts, isEn);
+
+            if (badgeText) {
+                badgeText.innerHTML = isEn 
+                    ? `<span class="text-emerald-600 font-extrabold">● Live Synced</span> with @${channelConfig.name}` 
+                    : `<span class="text-emerald-600 font-extrabold">● සජීවීව Sync විය</span> (@${channelConfig.name})`;
             }
         }
     } catch (err) {
-        console.warn('Live YouTube Feed auto-fetch (fallback to local cache):', err.message);
+        console.warn("YouTube sync notice (using cached/baseline feed):", err.message);
+        if (badgeText) {
+            badgeText.innerText = isEn ? "Official YouTube Channel • Auto Sync" : "නිල YouTube නාලිකාව • Auto Sync";
+        }
+    } finally {
+        if (syncIcon) syncIcon.classList.remove('fa-spin');
     }
 }
 
+// Backward-compatibility alias
+function autoLoadSiwmagaYouTubeFeed() {
+    return syncYouTubeFeed(false);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-    // Initial immediate render with popular tab active
-    switchYoutubeTab('popular');
-    
-    // Auto load fresh channel feed in background
-    autoLoadSiwmagaYouTubeFeed();
+    // Default active tab to 'latest' so newest channel uploads are immediately visible
+    switchYoutubeTab('latest');
+
+    // Auto load & sync channel feed
+    syncYouTubeFeed(false);
+    // Auto-refresh YouTube feed every 10 minutes (600,000 ms)
+    setInterval(() => syncYouTubeFeed(true), 600000);
 });
 
 

@@ -14,7 +14,7 @@ html, body {
 
 body {
     background: #ffffff;
-    font-family: 'Noto Sans Sinhala', 'Plus Jakarta Sans', 'Poppins', 'Sinhala Sangam MN', sans-serif;
+    font-family: 'Noto Sans Sinhala', 'Nunito', 'Sinhala Sangam MN', sans-serif;
     overflow-x: hidden;
     color: #333;
     line-height: 1.8;
@@ -29,7 +29,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Gemunu Libre', 'Abhaya Libre', 'Playfair Display', 'Noto Sans Sinhala', 'Sinhala Sangam MN', serif;
+    font-family: 'Gemunu Libre', 'Abhaya Libre', 'Nunito', 'Noto Sans Sinhala', 'Sinhala Sangam MN', sans-serif;
     font-weight: 800;
     line-height: 1.4;
 }
@@ -39,13 +39,13 @@ span,
 td,
 li,
 a {
-    font-family: 'Noto Sans Sinhala', 'Poppins', 'Plus Jakarta Sans', 'Sinhala Sangam MN', sans-serif;
+    font-family: 'Noto Sans Sinhala', 'Nunito', 'Sinhala Sangam MN', sans-serif;
 }
 
 /* --- SAFARI & WEBKIT SINHALA RENDERING FIX --- */
 html[lang="si"],
 html[lang="si"] body {
-    font-family: 'Noto Sans Sinhala', 'Gemunu Libre', 'Abhaya Libre', 'Sinhala Sangam MN', 'Poppins', sans-serif;
+    font-family: 'Noto Sans Sinhala', 'Gemunu Libre', 'Abhaya Libre', 'Sinhala Sangam MN', 'Nunito', sans-serif;
     letter-spacing: normal !important;
 }
 
@@ -55,7 +55,7 @@ html[lang="si"] h3,
 html[lang="si"] h4,
 html[lang="si"] h5,
 html[lang="si"] h6 {
-    font-family: 'Gemunu Libre', 'Abhaya Libre', 'Noto Sans Sinhala', 'Sinhala Sangam MN', serif;
+    font-family: 'Gemunu Libre', 'Abhaya Libre', 'Noto Sans Sinhala', 'Sinhala Sangam MN', sans-serif;
     letter-spacing: normal !important;
 }
 
@@ -182,7 +182,7 @@ img.fade-in-ready.loaded {
     align-items: center;
     line-height: 1.5;
     letter-spacing: normal;
-    font-family: 'Noto Sans Sinhala', 'Gemunu Libre', 'Inter', sans-serif;
+    font-family: 'Noto Sans Sinhala', 'Gemunu Libre', 'Nunito', sans-serif;
     transition: var(--transition);
 }
 
@@ -644,32 +644,30 @@ img.fade-in-ready.loaded {
 .content .name,
 .news-card h3,
 #modal-title {
-    font-family: 'Playfair Display', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', serif !important;
+    font-family: 'Nunito', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', sans-serif !important;
 }
 
 .content .name {
     font-size: clamp(32px, 5.2vw, 48px);
     font-weight: 800;
-    opacity: 0;
+    opacity: 1;
     line-height: 1.25;
     color: #ffffff;
     letter-spacing: 0.01em;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(245, 158, 11, 0.3);
-    animation: animateContent 0.8s ease-in-out 1 forwards;
 }
 
 .content .des {
-    font-family: 'Poppins', 'Abhaya Libre', 'Noto Sans Sinhala', sans-serif;
+    font-family: 'Nunito', 'Abhaya Libre', 'Noto Sans Sinhala', sans-serif;
     font-size: clamp(14px, 1.6vw, 19px);
     font-weight: 500;
     margin-top: 15px;
     margin-bottom: 25px;
-    opacity: 0;
+    opacity: 1;
     color: #cbd5e1;
     line-height: 1.75;
     letter-spacing: 0.015em;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-    animation: animateContent 0.8s ease-in-out 0.2s 1 forwards;
 }
 
 .content button {
@@ -681,10 +679,21 @@ img.fade-in-ready.loaded {
     border-radius: 30px;
     font-size: clamp(13px, 1.5vw, 16px);
     font-weight: 600;
-    opacity: 0;
+    opacity: 1;
     box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-    animation: animateContent 0.8s ease-in-out 0.4s 1 forwards;
     transition: var(--transition);
+}
+
+.slide .item:nth-child(2) .content .name {
+    animation: animateContent 0.5s ease-out 1 forwards;
+}
+
+.slide .item:nth-child(2) .content .des {
+    animation: animateContent 0.5s ease-out 0.1s 1 forwards;
+}
+
+.slide .item:nth-child(2) .content button {
+    animation: animateContent 0.5s ease-out 0.15s 1 forwards;
 }
 
 .content button:hover {
@@ -696,14 +705,12 @@ img.fade-in-ready.loaded {
 @keyframes animateContent {
     from {
         opacity: 0;
-        transform: translate(0, 80px);
-        filter: blur(15px);
+        transform: translateY(25px);
     }
 
     to {
         opacity: 1;
-        transform: translate(0);
-        filter: blur(0);
+        transform: translateY(0);
     }
 }
 
@@ -805,7 +812,7 @@ img.fade-in-ready.loaded {
     }
 
     .content .name {
-        font-family: 'Playfair Display', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', serif;
+        font-family: 'Nunito', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', sans-serif;
         font-size: 28px !important;
         font-weight: 800;
         line-height: 1.3;
@@ -813,7 +820,7 @@ img.fade-in-ready.loaded {
     }
 
     .content .des {
-        font-family: 'Poppins', 'Abhaya Libre', 'Noto Sans Sinhala', sans-serif;
+        font-family: 'Nunito', 'Abhaya Libre', 'Noto Sans Sinhala', sans-serif;
         font-size: 13.5px !important;
         color: #cbd5e1 !important;
         margin-top: 10px;
@@ -1408,7 +1415,7 @@ img.fade-in-ready.loaded {
 }
 
 .invitation-text {
-    font-family: 'Playfair Display', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', serif !important;
+    font-family: 'Nunito', 'Abhaya Libre', 'Gemunu Libre', 'Noto Sans Sinhala', sans-serif !important;
     font-size: 1.15rem;
     line-height: 1.8;
     color: #e2e8f0;
@@ -1602,18 +1609,18 @@ img.fade-in-ready.loaded {
            ========================================================================== */
 
 html[lang="en"] body {
-    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 html[lang="en"] .hero-container .content .name {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-weight: 800 !important;
     letter-spacing: -0.02em;
     text-transform: uppercase;
 }
 
 html[lang="en"] .hero-container .content .des {
-    font-family: 'Instrument Serif', serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-style: italic !important;
     font-size: clamp(16px, 2vw, 24px) !important;
     color: #cbd5e1 !important;
@@ -1623,7 +1630,7 @@ html[lang="en"] .hero-container .content .des {
 
 /* 2. Registration Section (SIVUMAGA DAHAM PASALA REGISTRATION) */
 html[lang="en"] #daham-pasala h2 {
-    font-family: 'Cabinet Grotesk', 'Syne', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-weight: 800 !important;
     letter-spacing: -0.03em;
 }
@@ -1631,19 +1638,19 @@ html[lang="en"] #daham-pasala h2 {
 html[lang="en"] #daham-pasala p,
 html[lang="en"] #daham-pasala a,
 html[lang="en"] .btn-daham-apply {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
 }
 
 /* 3. Services Section */
 html[lang="en"] #services h2,
 html[lang="en"] .service-card h3 {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-weight: 700 !important;
 }
 
 html[lang="en"] #services p,
 html[lang="en"] .service-card .description {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-weight: 400 !important;
 }
 
@@ -1651,7 +1658,7 @@ html[lang="en"] .service-card .description {
 html[lang="en"] #news h2,
 html[lang="en"] .news-card h3,
 html[lang="en"] #modal-title {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-weight: 700 !important;
 }
 
@@ -1662,12 +1669,12 @@ html[lang="en"] .news-card button,
 html[lang="en"] #modal-text,
 html[lang="en"] #modal-badge,
 html[lang="en"] #modal-date {
-    font-family: 'Urbanist', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
 }
 
 /* 5. Footer Section */
 html[lang="en"] .invitation-text {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nunito', sans-serif !important;
     font-style: italic !important;
     font-weight: 600 !important;
     font-size: 1.15rem !important;
